@@ -19,8 +19,8 @@ services:
         environment:
             - XDEBUG_ENABLED=1    # as a frontend dev i would set to 0 for performance
             - FILEBEAT_ENABLED=0
-
     # -----------------------------------------------------------------------
+
     mailcatcher:
         container_name: dw__tsv_squad_planner_mailcatcher
         image: schickling/mailcatcher
@@ -58,6 +58,7 @@ services:
         volumes:
             - dw__redis__tsv_squad_planner_volume:/data
     # -----------------------------------------------------------------------
+
     adminer: # to open it :http://localhost:8080, server: db, user:root, pwd:root
         image: adminer
         container_name: dw__tsv_squad_planner_adminer
@@ -66,7 +67,6 @@ services:
             - 8080:8080
         networks:
             - web
-
 
 ## ***********************************************************************
 ##  PERSISTENT DOCKER VOLUMES
