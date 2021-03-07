@@ -10,6 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Player
 {
+    public const FOOT_LEFT  = 'left';
+    public const FOOT_RIGHT = 'right';
+
+    public static $_foots = [
+        self::FOOT_LEFT,
+        self::FOOT_RIGHT,
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -31,6 +39,11 @@ class Player
      * @ORM\Column(type="date")
      */
     private $birthday;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $foot;
 
     public function getId(): ?int
     {
@@ -76,5 +89,17 @@ class Player
     public function getFullname(): ?string
     {
         return implode(' ', [$this->getFirstname(), $this->getLastname()]);
+    }
+
+    public function getFoot(): ?string
+    {
+        return $this->foot;
+    }
+
+    public function setFoot(string $foot): self
+    {
+        $this->foot = $foot;
+
+        return $this;
     }
 }

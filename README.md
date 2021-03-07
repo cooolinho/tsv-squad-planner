@@ -12,3 +12,8 @@ http://localhost
 
 #### Database Connection
 > **Note:** look in .env - File
+
+### Debug Toolbar Error
+``
+composer require symfony/apache-pack
+``
