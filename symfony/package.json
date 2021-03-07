@@ -1,0 +1,28 @@
+{
+  "name": "tsv-squad-planner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cooolinhi/tsv-squad-planner.git"
+  },
+  "keywords": [
+    "tsv",
+    "squad",
+    "planner",
+    "symfony"
+  ],
+  "author": "Colin Deepe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cooolinhi/tsv-squad-planner/issues"
+  },
+  "homepage": "https://github.com/cooolinhi/tsv-squad-planner#readme"
+}
