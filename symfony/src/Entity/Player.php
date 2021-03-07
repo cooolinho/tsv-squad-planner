@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlayerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -44,6 +46,21 @@ class Player
      * @ORM\Column(type="string")
      */
     private $foot;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Team::class, mappedBy="players")
+     */
+    private $teams;
+
+    public function __construct()
+    {
+        $this->teams = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getFullname();
+    }
 
     public function getId(): ?int
     {
@@ -99,6 +116,33 @@ class Player
     public function setFoot(string $foot): self
     {
         $this->foot = $foot;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Team[]
+     */
+    public function getTeams(): Collection
+    {
+        return $this->teams;
+    }
+
+    public function addTeam(Team $team): self
+    {
+        if (!$this->teams->contains($team)) {
+            $this->teams[] = $team;
+            $team->addPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeam(Team $team): self
+    {
+        if ($this->teams->removeElement($team)) {
+            $team->removePlayer($this);
+        }
 
         return $this;
     }
