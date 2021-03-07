@@ -1,44 +1,85 @@
 version: '3'
 
 services:
+    app:
+        container_name: dw__tsv_squad_planner_shopware
+        image: dockware/flex:latest
+        ports:
+            - "22:22"     # ssh
+            - "80:80"     # apache2
+            - "8888:8888" # watch admin
+            - "9998:9998" # watch storefront proxy (not needed if you start with "make watch-storefront")
+            - "9999:9999" # watch storefront
+        volumes:
+            - ./symfony:/var/www/html
+        networks:
+            - web
+        links:
+            - mailcatcher:mailserver # as we wan't to get your mails in mailcatcher we have to link it here
+        environment:
+            - XDEBUG_ENABLED=1    # as a frontend dev i would set to 0 for performance
+            - FILEBEAT_ENABLED=0
+
+    # -----------------------------------------------------------------------
+    mailcatcher:
+        container_name: dw__tsv_squad_planner_mailcatcher
+        image: schickling/mailcatcher
+        ports:
+            - "1080:1080" # simple call it with http://localhost:1080, for shure you can choose any port you wan't on the left side of the mapping...
+        networks:
+            - web
+    # -----------------------------------------------------------------------
+
     db:
-        build:
-            context: .
-            dockerfile: docker/database/Dockerfile
-        command: ["--default-authentication-plugin=mysql_native_password"]
+        container_name: dw__tsv_squad_planner_db
+        image: mysql:5.7 # if you wan't another mysql Version just choose another one: https://hub.docker.com/_/mysql?tab=tags
+        command: mysqld --sql_mode="ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" --thread_stack=400000
+        volumes:
+            - "dw__db_tsv_squad_planner_volume:/var/lib/mysql"
+        ports:
+            - "3307:3306"
+        networks:
+            - web
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            TZ: ${TIMEZONE}
+    # -----------------------------------------------------------------------
+
+    redis:
+        container_name: dw__tsv_squad_planner_redis
+        image: redis:4.0
         ports:
-            - "3307:3306"
+            - "6379:6379"
         networks:
-            - symfony
-
-    php:
-        build:
-            context: .
-            dockerfile: docker/php/Dockerfile
-            args:
-                TIMEZONE: ${TIMEZONE}
+            - web
         volumes:
-            - ./symfony/:/var/www/symfony/
-        networks:
-            - symfony
-
-    nginx:
-        build:
-            context: .
-            dockerfile: docker/nginx/Dockerfile
-        volumes:
-            - ./symfony/:/var/www/symfony/
-            - ./docker/logs/nginx/:/var/log/nginx/
+            - dw__redis__tsv_squad_planner_volume:/data
+    # -----------------------------------------------------------------------
+    adminer: # to open it :http://localhost:8080, server: db, user:root, pwd:root
+        image: adminer
+        container_name: dw__tsv_squad_planner_adminer
+        restart: always
         ports:
-            - 80:80
-            - 443:443
+            - 8080:8080
         networks:
-            - symfony
+            - web
 
+
+## ***********************************************************************
+##  PERSISTENT DOCKER VOLUMES
+## ***********************************************************************
+volumes:
+    dw__db_tsv_squad_planner_volume:
+        driver: local
+    dw__redis__tsv_squad_planner_volume:
+        driver: local
+
+## ***********************************************************************
+##  NETWORKS
+## ***********************************************************************
 networks:
-    symfony:
+    web:
+        external: false
