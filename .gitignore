@@ -1,0 +1,6 @@
+/.idea/
+
+# Docker
+/docker/logs/nginx/*.log
+
+
