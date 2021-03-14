@@ -2,6 +2,7 @@
 
 namespace App\Controller\Trainer;
 
+use App\Entity\Player;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -29,6 +30,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToRoute('My Players', 'fas fa-list', 'trainer_player_index');
+        yield MenuItem::linkToCrud('Players', 'fas fa-list', Player::class)
+            ->setController(PlayerCrudController::class);
     }
 }

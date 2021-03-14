@@ -5,8 +5,6 @@ namespace App\Entity;
 use App\Entity\Traits\BirthdayTrait;
 use App\Entity\Traits\NameTrait;
 use App\Repository\PlayerRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,7 +18,7 @@ class Player
     public const FOOT_RIGHT = 'right';
     public const FOOT_BOTH = 'both';
 
-    public static $availableFoots = [
+    public static array $availableFoots = [
         'player.foot.left' => Player::FOOT_LEFT,
         'play.foot.right' => Player::FOOT_RIGHT,
         'play.foot.both' => Player::FOOT_BOTH,
@@ -31,22 +29,17 @@ class Player
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string")
      */
-    private $foot;
+    private string $foot;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Team::class, mappedBy="players")
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="players")
      */
-    private $teams;
-
-    public function __construct()
-    {
-        $this->teams = new ArrayCollection();
-    }
+    private ?Team $team;
 
     public function __toString(): string
     {
@@ -77,29 +70,14 @@ class Player
         return $this;
     }
 
-    /**
-     * @return Collection|Team[]
-     */
-    public function getTeams(): Collection
+    public function getTeam(): ?Team
     {
-        return $this->teams;
+        return $this->team;
     }
 
-    public function addTeam(Team $team): self
+    public function setTeam(?Team $team): self
     {
-        if (!$this->teams->contains($team)) {
-            $this->teams[] = $team;
-            $team->addPlayer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTeam(Team $team): self
-    {
-        if ($this->teams->removeElement($team)) {
-            $team->removePlayer($this);
-        }
+        $this->team = $team;
 
         return $this;
     }

@@ -5,8 +5,8 @@ namespace App\DataFixtures;
 use App\Entity\Player;
 use App\Helper\RandomHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ObjectManager;
 
 class PlayerFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -25,7 +25,7 @@ class PlayerFixtures extends Fixture implements DependentFixtureInterface
                     RandomHelper::getBirthday($youthTeam[TeamFixtures::MIN_AGE], $youthTeam[TeamFixtures::MAX_AGE])
                 );
                 $player->setFoot(RandomHelper::getArrayValue(array_values(Player::$availableFoots)));
-                $player->addTeam($team);
+                $player->setTeam($team);
 
                 $manager->persist($player);
             }

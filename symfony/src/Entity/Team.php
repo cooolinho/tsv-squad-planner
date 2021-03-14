@@ -17,26 +17,31 @@ class Team
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $name;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Player::class, inversedBy="teams")
-     */
-    private $players;
+    private ?string $name;
 
     /**
      * @ORM\OneToOne(targetEntity=Trainer::class, mappedBy="team", cascade={"persist", "remove"})
      */
-    private $trainer;
+    private ?Trainer $trainer;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Player::class, mappedBy="team")
+     */
+    private Collection $players;
 
     public function __construct()
     {
         $this->players = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -56,30 +61,6 @@ class Team
         return $this;
     }
 
-    /**
-     * @return Collection|Player[]
-     */
-    public function getPlayers(): Collection
-    {
-        return $this->players;
-    }
-
-    public function addPlayer(Player $player): self
-    {
-        if (!$this->players->contains($player)) {
-            $this->players[] = $player;
-        }
-
-        return $this;
-    }
-
-    public function removePlayer(Player $player): self
-    {
-        $this->players->removeElement($player);
-
-        return $this;
-    }
-
     public function getTrainer(): ?Trainer
     {
         return $this->trainer;
@@ -93,6 +74,36 @@ class Team
         }
 
         $this->trainer = $trainer;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Player[]
+     */
+    public function getPlayers(): Collection
+    {
+        return $this->players;
+    }
+
+    public function addPlayer(Player $player): self
+    {
+        if (!$this->players->contains($player)) {
+            $this->players[] = $player;
+            $player->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlayer(Player $player): self
+    {
+        if ($this->players->removeElement($player)) {
+            // set the owning side to null (unless already changed)
+            if ($player->getTeam() === $this) {
+                $player->setTeam(null);
+            }
+        }
 
         return $this;
     }
