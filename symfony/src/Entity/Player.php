@@ -12,12 +12,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Player
 {
-    public const FOOT_LEFT  = 'left';
+    public const FOOT_LEFT = 'left';
     public const FOOT_RIGHT = 'right';
+    public const FOOT_BOTH = 'both';
 
-    public static $_foots = [
-        self::FOOT_LEFT,
-        self::FOOT_RIGHT,
+    public static $availableFoots = [
+        'player.foot.left' => Player::FOOT_LEFT,
+        'play.foot.right' => Player::FOOT_RIGHT,
+        'play.foot.both' => Player::FOOT_BOTH,
     ];
 
     /**

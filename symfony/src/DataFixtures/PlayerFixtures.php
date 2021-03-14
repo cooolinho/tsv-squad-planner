@@ -3,30 +3,32 @@
 namespace App\DataFixtures;
 
 use App\Entity\Player;
+use App\Helper\RandomHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class PlayerFixtures extends Fixture implements DependentFixtureInterface
 {
-    private static $demoPlayers = [
-        ['John', 'Doe', '2000-01-01', Player::FOOT_LEFT],
-        ['Peter', 'Pan', '2000-06-01', Player::FOOT_RIGHT],
-    ];
+    private const PLAYER_COUNT_IN_TEAM = 25;
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        $demoTeam = $this->getReference(TeamFixtures::DEMO_TEAM);
+        foreach (TeamFixtures::$youthTeams as $teamIdentifier => $youthTeam) {
+            $team = $this->getReference(TeamFixtures::getTeamName($teamIdentifier));
 
-        foreach (static::$demoPlayers as $demoPlayer) {
-            $player = new Player();
-            $player->setFirstname($demoPlayer[0]);
-            $player->setLastname($demoPlayer[1]);
-            $player->setBirthday(new \DateTime($demoPlayer[2]));
-            $player->setFoot($demoPlayer[3]);
-            $player->addTeam($demoTeam);
+            for ($i = 0; $i < self::PLAYER_COUNT_IN_TEAM; $i++) {
+                $player = new Player();
+                $player->setFirstname(RandomHelper::getFirstname());
+                $player->setLastname(RandomHelper::getLastname());
+                $player->setBirthday(
+                    RandomHelper::getBirthday($youthTeam[TeamFixtures::MIN_AGE], $youthTeam[TeamFixtures::MAX_AGE])
+                );
+                $player->setFoot(RandomHelper::getArrayValue(array_values(Player::$availableFoots)));
+                $player->addTeam($team);
 
-            $manager->persist($player);
+                $manager->persist($player);
+            }
         }
 
         $manager->flush();
@@ -34,8 +36,6 @@ class PlayerFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies(): array
     {
-        return [
-            TeamFixtures::class,
-        ];
+        return [TeamFixtures::class];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Player;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -24,10 +25,14 @@ class PlayerCrudController extends AbstractCrudController
             DateField::new('birthday'),
             ChoiceField::new('foot', 'player.foot.label')
                 ->autocomplete()
-                ->setChoices([
-                    'player.foot.left' => Player::FOOT_LEFT,
-                    'play.foot.right' => Player::FOOT_RIGHT,
-                ])
+                ->setChoices(Player::$availableFoots)
         ];
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('birthday')
+            ->add('foot');
     }
 }
