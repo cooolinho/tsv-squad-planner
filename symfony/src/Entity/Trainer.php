@@ -52,12 +52,4 @@ class Trainer implements UserInterface
 
         return $this;
     }
-
-    public function getRoles(): array
-    {
-        $roles = $this->getRoles();
-        $roles[] = static::ROLE_TRAINER;
-
-        return array_unique($roles);
-    }
 }

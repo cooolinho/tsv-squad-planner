@@ -6,10 +6,8 @@ security:
         App\Entity\Trainer:
             algorithm: auto
 
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
+        app_admin_provider:
             entity:
                 class: App\Entity\User
                 property: email
@@ -17,29 +15,43 @@ security:
             entity:
                 class: App\Entity\Trainer
                 property: email
-        # used to reload user from session & other features (e.g. switch_user)
+        all_users:
+            chain:
+                providers: [ 'app_admin_provider', 'app_trainer_provider' ]
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+        secured_admin_area:
             lazy: true
-            provider: app_user_provider
+            pattern: ^/admin
+            provider: all_users
+            user_checker: App\Security\Admin\UserChecker
             custom_authenticator:
-                - App\Security\LoginFormAuthenticator
+                - App\Security\Admin\Authenticator
             logout:
-                path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
+                path: admin_logout
+                target: home
+        secured_trainer_area:
+            lazy: true
+            pattern: ^/trainer
+            provider: all_users
+            user_checker: App\Security\Trainer\UserChecker
+            custom_authenticator:
+                - App\Security\Trainer\Authenticator
+            logout:
+                path: trainer_logout
+                target: home
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+        ROLE_ADMIN: ROLE_USER
+        ROLE_TRAINER: ROLE_USER
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/trainer/login, roles: PUBLIC_ACCESS }
+        - { path: ^/trainer/logout, roles: PUBLIC_ACCESS }
+        - { path: ^/admin/login, roles: PUBLIC_ACCESS }
+        - { path: ^/admin/logout, roles: PUBLIC_ACCESS }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/trainer, roles: ROLE_TRAINER }

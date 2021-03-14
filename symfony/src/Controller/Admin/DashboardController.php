@@ -13,8 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+    public const ROUTE_INDEX = 'admin_dashboard';
+
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/admin", name="admin_dashboard")
      */
     public function index(): Response
     {
