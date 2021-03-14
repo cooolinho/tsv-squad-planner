@@ -29,6 +29,11 @@ class Team
      */
     private $players;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Trainer::class, mappedBy="team", cascade={"persist", "remove"})
+     */
+    private $trainer;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
@@ -71,6 +76,23 @@ class Team
     public function removePlayer(Player $player): self
     {
         $this->players->removeElement($player);
+
+        return $this;
+    }
+
+    public function getTrainer(): ?Trainer
+    {
+        return $this->trainer;
+    }
+
+    public function setTrainer(Trainer $trainer): self
+    {
+        // set the owning side of the relation if necessary
+        if ($trainer->getTeam() !== $this) {
+            $trainer->setTeam($this);
+        }
+
+        $this->trainer = $trainer;
 
         return $this;
     }

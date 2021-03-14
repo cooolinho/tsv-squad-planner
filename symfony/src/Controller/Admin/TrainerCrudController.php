@@ -2,24 +2,23 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Team;
+use App\Entity\Trainer;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 
-class TeamCrudController extends AbstractCrudController
+class TrainerCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Team::class;
+        return Trainer::class;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name'),
-            AssociationField::new('players'),
-            AssociationField::new('trainer'),
+            EmailField::new('email'),
+            AssociationField::new('team'),
         ];
     }
 }
