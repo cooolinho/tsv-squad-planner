@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Trainer;
 use App\Helper\RandomHelper;
+use App\Helper\YouthClassHelper;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
@@ -11,7 +12,7 @@ class TrainerFixtures extends UserFixtures implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        foreach (TeamFixtures::$youthTeams as $teamIdentifier => $youthTeam) {
+        foreach (YouthClassHelper::$youthTeams as $teamIdentifier => $youthTeam) {
             $trainerName = $teamIdentifier . '-' . TeamFixtures::YOUTH . '-trainer';
 
             $trainer = new Trainer();

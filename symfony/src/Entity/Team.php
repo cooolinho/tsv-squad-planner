@@ -34,6 +34,11 @@ class Team
      */
     private Collection $players;
 
+    /**
+     * @ORM\Column(type="string", length=1)
+     */
+    private $youthClass;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
@@ -104,6 +109,18 @@ class Team
                 $player->setTeam(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getYouthClass(): ?string
+    {
+        return $this->youthClass;
+    }
+
+    public function setYouthClass(string $youthClass): self
+    {
+        $this->youthClass = $youthClass;
 
         return $this;
     }

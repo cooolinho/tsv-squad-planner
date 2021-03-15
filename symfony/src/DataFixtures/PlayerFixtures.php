@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Player;
 use App\Helper\RandomHelper;
+use App\Helper\YouthClassHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -14,7 +15,7 @@ class PlayerFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        foreach (TeamFixtures::$youthTeams as $teamIdentifier => $youthTeam) {
+        foreach (YouthClassHelper::$youthTeams as $teamIdentifier => $youthTeam) {
             $team = $this->getReference(TeamFixtures::getTeamName($teamIdentifier));
 
             for ($i = 0; $i < self::PLAYER_COUNT_IN_TEAM; $i++) {
@@ -22,7 +23,10 @@ class PlayerFixtures extends Fixture implements DependentFixtureInterface
                 $player->setFirstname(RandomHelper::getFirstname());
                 $player->setLastname(RandomHelper::getLastname());
                 $player->setBirthday(
-                    RandomHelper::getBirthday($youthTeam[TeamFixtures::MIN_AGE], $youthTeam[TeamFixtures::MAX_AGE])
+                    RandomHelper::getBirthday(
+                        $youthTeam[YouthClassHelper::MIN_AGE] ?? RandomHelper::DEFAULT_MIN_AGE,
+                        $youthTeam[YouthClassHelper::MAX_AGE]
+                    )
                 );
                 $player->setFoot(RandomHelper::getArrayValue(array_values(Player::$availableFoots)));
                 $player->setTeam($team);
