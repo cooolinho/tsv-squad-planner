@@ -36,5 +36,6 @@ class DashboardController extends AbstractDashboardController
             ->setController(PlayerCrudController::class);
         yield MenuItem::linkToCrud('Teams', 'fas fa-list', Team::class);
         yield MenuItem::linkToCrud('Trainer', 'fas fa-list', Trainer::class);
+        yield MenuItem::linkToRoute('Planner', 'fas fa-list', 'squad_planner_index');
     }
 }

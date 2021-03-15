@@ -32,5 +32,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Players', 'fas fa-list', Player::class)
             ->setController(PlayerCrudController::class);
+        yield MenuItem::linkToRoute('Planner', 'fas fa-list', 'squad_planner_index');
     }
 }

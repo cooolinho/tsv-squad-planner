@@ -43,12 +43,12 @@ class RandomHelper
         return new \DateTime($randomDate);
     }
 
-    public static function getDateSubstractByYears(int $years = 0)
+    public static function getDateSubstractByYears(int $years = 0): \DateTime
     {
         return (new \DateTime())->modify('-' . $years . ' year');
     }
 
-    public static function getArrayValue(array $arr)
+    public static function getArrayValue(array $arr): ?string
     {
         if (empty($arr)) {
             return null;

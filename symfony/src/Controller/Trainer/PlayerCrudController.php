@@ -14,7 +14,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
-use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -24,9 +23,9 @@ class PlayerCrudController extends AdminPlayerCrudController
 {
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
-        parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+        $queryBuilder = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
 
-        return $this->filterPlayersByTrainer($searchDto, $entityDto, $fields, $filters);
+        return $this->filterPlayersByTrainer($queryBuilder);
     }
 
     public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
@@ -43,8 +42,8 @@ class PlayerCrudController extends AdminPlayerCrudController
                 $minAgeDate->format('Y'),
                 $maxAgeDate->format('Y'),
             ),
-            'months' => range(date('m'), 12),
-            'days' => range(date('d'), 31),
+            'months' => range(1, 12),
+            'days' => range(1, 31),
         ]);
 
         $formBuilder->get('team')->setDisabled(true);
@@ -57,17 +56,16 @@ class PlayerCrudController extends AdminPlayerCrudController
         return $formBuilder;
     }
 
-    private function filterPlayersByTrainer(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
+    private function filterPlayersByTrainer(QueryBuilder $queryBuilder): QueryBuilder
     {
         if (!$this->getTeamByUser() instanceof Team) {
             throw new TeamNotFoundException();
         }
 
-        $response = $this->get(EntityRepository::class)->createQueryBuilder($searchDto, $entityDto, $fields, $filters);
-        $response->andWhere('entity.team = :team');
-        $response->setParameter('team', $this->getTeamByUser());
+        $queryBuilder->andWhere('entity.team = :team');
+        $queryBuilder->setParameter('team', $this->getTeamByUser());
 
-        return $response;
+        return $queryBuilder;
     }
 
     private function getTeamByUser(): ?Team

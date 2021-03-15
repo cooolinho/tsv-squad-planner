@@ -50,7 +50,7 @@ class YouthClassHelper
         return self::$youthTeams[$identifier] ?? null;
     }
 
-    public static function getMinAgeByYouthClass(string $identifier)
+    public static function getMinAgeByYouthClass(string $identifier): \DateTime
     {
         return RandomHelper::getDateSubstractByYears(self::getMinAgeClassByIdentifier($identifier));
     }
@@ -60,7 +60,7 @@ class YouthClassHelper
         return self::$youthTeams[$identifier][self::MIN_AGE] ?? RandomHelper::DEFAULT_MIN_AGE;
     }
 
-    public static function getMaxAgeByYouthClass(string $identifier)
+    public static function getMaxAgeByYouthClass(string $identifier): \DateTime
     {
         return RandomHelper::getDateSubstractByYears(self::getMaxAgeClassByIdentifier($identifier));
     }
@@ -68,5 +68,41 @@ class YouthClassHelper
     public static function getMaxAgeClassByIdentifier(string $identifier): int
     {
         return self::$youthTeams[$identifier][self::MAX_AGE] ?? RandomHelper::DEFAULT_MAX_AGE;
+    }
+
+    public static function getClassesForChoiceType(): array
+    {
+        $choices = [];
+
+        foreach (self::$youthTeams as $identifier => $youthTeam) {
+            $label = 'U' . $youthTeam[self::MAX_AGE];
+
+            if (array_key_exists(self::MIN_AGE, $youthTeam)) {
+                $label .= '/' . $youthTeam[self::MIN_AGE];
+            }
+
+            $choices[$label] = $identifier;
+        }
+
+        return $choices;
+    }
+
+    public static function getDateByYouthClass(
+        string $youthClass,
+        string $modifyYears = '+0',
+        bool $min = true
+    ): \DateTime
+    {
+        if (!$min) {
+            $date = self::getMinAgeByYouthClass($youthClass);
+        } else {
+            $date = self::getMaxAgeByYouthClass($youthClass);
+        }
+
+        $date
+            ->modify($modifyYears . ' year')
+            ->setTime($min ? 0 : 23, $min ? 0 : 59, $min ? 0 : 59);
+
+        return $date->setDate(date('Y', $date->getTimestamp()), $min ? 1 : 12, $min ? 1 : 31);
     }
 }
