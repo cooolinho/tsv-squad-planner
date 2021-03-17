@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Importer\Importer;
+use Cooolinho\Bundle\FileImporterBundle\Reader\CsvReader;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -26,7 +26,7 @@ class PlayerUploadType extends AbstractType
                 'label' => 'label.format',
                 'required' => true,
                 'choices' => [
-                    'csv_delimetered' => Importer::FORMAT_CSV,
+                    'csv_delimetered' => CsvReader::TYPE,
                 ],
                 'placeholder' => 'label.choose',
             ])

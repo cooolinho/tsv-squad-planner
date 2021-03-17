@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Importer;
+declare(strict_types=1);
+
+namespace Cooolinho\Bundle\FileImporterBundle\Reader;
 
 use Iterator;
 use League\Csv\Exception;
@@ -9,10 +11,13 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use Symfony\Component\HttpFoundation\File\File;
 
-class CsvImporter
+class CsvReader
 {
+    public const TYPE = 'csv';
+    public const DEFAULT_DELIMETER = ';';
+
     private LoggerInterface $logger;
-    private string $delimeter = ';';
+    private string $delimeter = self::DEFAULT_DELIMETER;
 
     public function __construct(LoggerInterface $logger)
     {
