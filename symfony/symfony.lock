@@ -8,6 +8,9 @@
     "cooolinho/symfony-security-bundle": {
         "version": "dev-main"
     },
+    "cooolinho/symfony-ui-bundle": {
+        "version": "1.0.2"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

@@ -18,4 +18,5 @@ return [
     Cooolinho\Bundle\FileImporterBundle\FileImporterBundle::class => ['all' => true],
     SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle::class => ['all' => true],
     Cooolinho\SecurityBundle\CooolinhoSecurityBundle::class => ['all' => true],
+    Cooolinho\UiBundle\CooolinhoUiBundle::class => ['all' => true],
 ];
