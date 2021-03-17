@@ -1,0 +1,58 @@
+{% extends '@!EasyAdmin/page/content.html.twig' %}
+
+{% block page_title 'Import Players' %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    {{ 'label.file_upload'|trans }}
+                </div>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                    {{ form_row(form.file) }}
+                    {{ form_row(form.format) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    {{ 'Template for csv file'|trans }}
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        {{ 'All other Rows will be igonred'|trans|raw }}
+                    </div>
+                    <br>
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                        <tr>
+                            <th>{{ 'Firstname'|trans }}</th>
+                            <th>{{ 'Lastname'|trans }}</th>
+                            <th>{{ 'Birthday'|trans }}</th>
+                            <th>{{ 'Team'|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Max</td>
+                            <td>Mustermann</td>
+                            <td>26.03.2003</td>
+                            <td>A1</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+{% endblock %}

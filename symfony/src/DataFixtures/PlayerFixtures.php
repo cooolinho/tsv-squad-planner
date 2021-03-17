@@ -16,7 +16,7 @@ class PlayerFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         foreach (YouthClassHelper::$youthTeams as $teamIdentifier => $youthTeam) {
-            $team = $this->getReference(TeamFixtures::getTeamName($teamIdentifier));
+            $team = $this->getReference($teamIdentifier);
 
             for ($i = 0; $i < self::PLAYER_COUNT_IN_TEAM; $i++) {
                 $player = new Player();

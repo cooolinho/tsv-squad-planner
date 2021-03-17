@@ -13,14 +13,14 @@ class TrainerFixtures extends UserFixtures implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         foreach (YouthClassHelper::$youthTeams as $teamIdentifier => $youthTeam) {
-            $trainerName = $teamIdentifier . '-' . TeamFixtures::YOUTH . '-trainer';
+            $trainerName = $teamIdentifier . '-trainer';
 
             $trainer = new Trainer();
             $trainer->setFirstname(RandomHelper::getFirstname());
             $trainer->setLastname(RandomHelper::getLastname());
             $this->addDemoUserData($trainer, $trainerName, Trainer::ROLE_TRAINER);
 
-            $team = $this->getReference(TeamFixtures::getTeamName($teamIdentifier));
+            $team = $this->getReference($teamIdentifier);
             $team->setTrainer($trainer);
 
             $manager->persist($trainer);

@@ -14,11 +14,13 @@ class Player
 {
     use BirthdayTrait, NameTrait;
 
+    public const FOOT_UNKNOWN = 'unknown';
     public const FOOT_LEFT = 'left';
     public const FOOT_RIGHT = 'right';
     public const FOOT_BOTH = 'both';
 
     public static array $availableFoots = [
+        'play.foot.unknown' => Player::FOOT_UNKNOWN,
         'player.foot.left' => Player::FOOT_LEFT,
         'play.foot.right' => Player::FOOT_RIGHT,
         'play.foot.both' => Player::FOOT_BOTH,
@@ -34,10 +36,10 @@ class Player
     /**
      * @ORM\Column(type="string")
      */
-    private string $foot;
+    private string $foot = self::FOOT_UNKNOWN;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="players")
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="players", cascade={"persist"})
      */
     private ?Team $team;
 

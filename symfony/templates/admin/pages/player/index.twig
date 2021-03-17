@@ -1,0 +1,11 @@
+{% extends "@!EasyAdmin/crud/index.html.twig" %}
+
+{% block page_actions %}
+    {{ parent() }}
+
+    {% set url = ea_url()
+        .setController('App\\Controller\\Admin\\PlayerCrudController')
+        .setAction('import') %}
+    <a class="action-new btn btn-primary" href="{{ url }}"><i class="fas fa-file-import"></i> {{ 'label.import'|trans }}
+    </a>
+{% endblock %}

@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "363d515072d6c410512093e5de2da75d",
+  "content-hash": "6cbec1d8c84b882e3365ff66df6e1d1c",
   "packages": [
     {
       "name": "composer/package-versions-deprecated",
@@ -15,16 +15,16 @@
         "reference": "7413f0b55a051e89485c5cb9f765fe24bb02a7b6"
       },
       "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/composer/package-versions-deprecated/zipball/7413f0b55a051e89485c5cb9f765fe24bb02a7b6",
-                "reference": "7413f0b55a051e89485c5cb9f765fe24bb02a7b6",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.1.0 || ^2.0",
-                "php": "^7 || ^8"
-            },
-            "replace": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/composer/package-versions-deprecated/zipball/7413f0b55a051e89485c5cb9f765fe24bb02a7b6",
+        "reference": "7413f0b55a051e89485c5cb9f765fe24bb02a7b6",
+        "shasum": ""
+      },
+      "require": {
+        "composer-plugin-api": "^1.1.0 || ^2.0",
+        "php": "^7 || ^8"
+      },
+      "replace": {
                 "ocramius/package-versions": "1.11.99"
             },
             "require-dev": {
@@ -1836,25 +1836,103 @@
                 "rss": "https://github.com/laminas/laminas-zendframework-bridge/releases.atom",
                 "source": "https://github.com/laminas/laminas-zendframework-bridge"
             },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2021-02-25T21:54:58+00:00"
+          "funding": [
+            {
+              "url": "https://funding.communitybridge.org/projects/laminas-project",
+              "type": "community_bridge"
+            }
+          ],
+          "time": "2021-02-25T21:54:58+00:00"
         },
+    {
+      "name": "league/csv",
+      "version": "9.6.2",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/thephpleague/csv.git",
+        "reference": "f28da6e483bf979bac10e2add384c90ae9983e4e"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/thephpleague/csv/zipball/f28da6e483bf979bac10e2add384c90ae9983e4e",
+        "reference": "f28da6e483bf979bac10e2add384c90ae9983e4e",
+        "shasum": ""
+      },
+      "require": {
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "php": ">=7.2.5"
+      },
+      "require-dev": {
+        "ext-curl": "*",
+        "ext-dom": "*",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpstan/phpstan": "^0.12.0",
+        "phpstan/phpstan-phpunit": "^0.12.0",
+        "phpstan/phpstan-strict-rules": "^0.12.0",
+        "phpunit/phpunit": "^8.5"
+      },
+      "suggest": {
+        "ext-dom": "Required to use the XMLConverter and or the HTMLConverter classes",
+        "ext-iconv": "Needed to ease transcoding CSV using iconv stream filters"
+      },
+      "type": "library",
+      "extra": {
+        "branch-alias": {
+          "dev-master": "9.x-dev"
+        }
+      },
+      "autoload": {
+        "psr-4": {
+          "League\\Csv\\": "src"
+        },
+        "files": [
+          "src/functions_include.php"
+        ]
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
         {
-            "name": "monolog/monolog",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1cb1cde8e8dd0f70cc0fe51354a59acad9302084"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1cb1cde8e8dd0f70cc0fe51354a59acad9302084",
+          "name": "Ignace Nyamagana Butera",
+          "email": "nyamsprod@gmail.com",
+          "homepage": "https://github.com/nyamsprod/",
+          "role": "Developer"
+        }
+      ],
+      "description": "CSV data manipulation made easy in PHP",
+      "homepage": "http://csv.thephpleague.com",
+      "keywords": [
+        "convert",
+        "csv",
+        "export",
+        "filter",
+        "import",
+        "read",
+        "transform",
+        "write"
+      ],
+      "funding": [
+        {
+          "url": "https://github.com/sponsors/nyamsprod",
+          "type": "github"
+        }
+      ],
+      "time": "2020-12-10T19:40:30+00:00"
+    },
+    {
+      "name": "monolog/monolog",
+      "version": "2.2.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/Seldaek/monolog.git",
+        "reference": "1cb1cde8e8dd0f70cc0fe51354a59acad9302084"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1cb1cde8e8dd0f70cc0fe51354a59acad9302084",
                 "reference": "1cb1cde8e8dd0f70cc0fe51354a59acad9302084",
                 "shasum": ""
             },
@@ -7493,14 +7571,14 @@
                 "source": "https://github.com/symfony/web-link/tree/v5.2.4"
             },
             "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                  "type": "github"
-                },
+              {
+                "url": "https://symfony.com/sponsor",
+                "type": "custom"
+              },
+              {
+                "url": "https://github.com/fabpot",
+                "type": "github"
+              },
               {
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
@@ -7586,16 +7664,16 @@
       "dist": {
         "type": "zip",
         "url": "https://api.github.com/repos/symfony/yaml/zipball/7d6ae0cce3c33965af681a4355f1c4de326ed277",
-                "reference": "7d6ae0cce3c33965af681a4355f1c4de326ed277",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2.5",
-                "symfony/deprecation-contracts": "^2.1",
-                "symfony/polyfill-ctype": "~1.8"
-            },
-            "conflict": {
-                "symfony/console": "<4.4"
+        "reference": "7d6ae0cce3c33965af681a4355f1c4de326ed277",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">=7.2.5",
+        "symfony/deprecation-contracts": "^2.1",
+        "symfony/polyfill-ctype": "~1.8"
+      },
+      "conflict": {
+        "symfony/console": "<4.4"
             },
             "require-dev": {
                 "symfony/console": "^4.4|^5.0"

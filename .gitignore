@@ -3,4 +3,5 @@
 # Docker
 /docker/logs/nginx/*.log
 
-
+# Symfony
+/symfony/public/uploads/

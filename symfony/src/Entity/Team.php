@@ -37,7 +37,12 @@ class Team
     /**
      * @ORM\Column(type="string", length=1)
      */
-    private $youthClass;
+    private string $identifier;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isYouthTeam = true;
 
     public function __construct()
     {
@@ -62,6 +67,8 @@ class Team
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        $this->setIdentifier($name);
 
         return $this;
     }
@@ -113,14 +120,26 @@ class Team
         return $this;
     }
 
-    public function getYouthClass(): ?string
+    public function getIdentifier(): ?string
     {
-        return $this->youthClass;
+        return $this->identifier;
     }
 
-    public function setYouthClass(string $youthClass): self
+    public function setIdentifier(string $identifier): self
     {
-        $this->youthClass = $youthClass;
+        $this->identifier = str_replace(' ', '-', strtolower($identifier));
+
+        return $this;
+    }
+
+    public function getIsYouthTeam(): ?bool
+    {
+        return $this->isYouthTeam;
+    }
+
+    public function setIsYouthTeam(bool $isYouthTeam): self
+    {
+        $this->isYouthTeam = $isYouthTeam;
 
         return $this;
     }
