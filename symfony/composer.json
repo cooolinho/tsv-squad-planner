@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "composer/package-versions-deprecated": "1.11.99.1",
         "cooolinho/file-importer-bundle": "1.0.4",
+        "cooolinho/symfony-security-bundle": "dev-main",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^3.0",
