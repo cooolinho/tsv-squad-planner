@@ -15,8 +15,8 @@ return [
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
-    Cooolinho\Bundle\FileImporterBundle\FileImporterBundle::class => ['all' => true],
     SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle::class => ['all' => true],
-    Cooolinho\SecurityBundle\CooolinhoSecurityBundle::class => ['all' => true],
-    Cooolinho\UiBundle\CooolinhoUiBundle::class => ['all' => true],
+    Cooolinho\Bundle\FileImporterBundle\FileImporterBundle::class => ['all' => true],
+    Cooolinho\Bundle\SecurityBundle\CooolinhoSecurityBundle::class => ['all' => true],
+    Cooolinho\Bundle\UiBundle\CooolinhoUiBundle::class => ['all' => true],
 ];

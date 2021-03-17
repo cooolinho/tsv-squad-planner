@@ -120,16 +120,16 @@
         },
         {
             "name": "cooolinho/symfony-security-bundle",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cooolinho/symfony-security-bundle.git",
-                "reference": "780a57da2be44d3eb5b25b0fd3f181bf1d65075d"
+                "reference": "d796ca3e9e0ffb937aa6f486b6f7589cde71660e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cooolinho/symfony-security-bundle/zipball/780a57da2be44d3eb5b25b0fd3f181bf1d65075d",
-                "reference": "780a57da2be44d3eb5b25b0fd3f181bf1d65075d",
+                "url": "https://api.github.com/repos/cooolinho/symfony-security-bundle/zipball/d796ca3e9e0ffb937aa6f486b6f7589cde71660e",
+                "reference": "d796ca3e9e0ffb937aa6f486b6f7589cde71660e",
                 "shasum": ""
             },
             "require": {
@@ -153,7 +153,7 @@
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
-                    "Cooolinho\\SecurityBundle\\": "src/"
+                    "Cooolinho\\Bundle\\SecurityBundle\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -161,20 +161,20 @@
                 "GPL-2.0-only"
             ],
             "description": "test reusable bundle",
-            "time": "2021-03-17T22:29:12+00:00"
+            "time": "2021-03-17T22:43:15+00:00"
         },
         {
             "name": "cooolinho/symfony-ui-bundle",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cooolinho/symfony-ui-bundle.git",
-                "reference": "4fcc867966d7b0cf0e6694aa56ac23dfa5682b95"
+                "reference": "5be3c5ce7b5779bf19e12282bb7b706ac4ccc445"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cooolinho/symfony-ui-bundle/zipball/4fcc867966d7b0cf0e6694aa56ac23dfa5682b95",
-                "reference": "4fcc867966d7b0cf0e6694aa56ac23dfa5682b95",
+                "url": "https://api.github.com/repos/cooolinho/symfony-ui-bundle/zipball/5be3c5ce7b5779bf19e12282bb7b706ac4ccc445",
+                "reference": "5be3c5ce7b5779bf19e12282bb7b706ac4ccc445",
                 "shasum": ""
             },
             "require": {
@@ -195,7 +195,7 @@
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
-                    "Cooolinho\\UiBundle\\": "src/"
+                    "Cooolinho\\Bundle\\UiBundle\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -203,7 +203,7 @@
                 "GPL-2.0-only"
             ],
             "description": "test reusable bundle",
-            "time": "2021-03-17T22:25:52+00:00"
+            "time": "2021-03-17T22:45:40+00:00"
         },
         {
             "name": "doctrine/annotations",
