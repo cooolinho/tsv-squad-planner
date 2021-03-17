@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use Cooolinho\FileImporterBundle\Reader\CsvReader;
+use Cooolinho\Bundle\FileImporterBundle\Reader\CsvReader;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;

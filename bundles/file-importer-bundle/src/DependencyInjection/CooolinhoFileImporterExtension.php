@@ -1,8 +1,8 @@
 <?php
 
-namespace Cooolinho\FileImporterBundle\DependencyInjection;
+namespace Cooolinho\Bundle\FileImporterBundle\DependencyInjection;
 
-use Cooolinho\FileImporterBundle\CooolinhoFileImporterBundle;
+use Cooolinho\Bundle\FileImporterBundle\CooolinhoFileImporterBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;

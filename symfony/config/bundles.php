@@ -15,5 +15,5 @@ return [
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
-    Cooolinho\FileImporterBundle\CooolinhoFileImporterBundle::class => ['all' => true],
+    Cooolinho\Bundle\FileImporterBundle\CooolinhoFileImporterBundle::class => ['all' => true],
 ];

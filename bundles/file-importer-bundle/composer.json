@@ -19,12 +19,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Cooolinho\\FileImporterBundle\\": "src/"
+      "Cooolinho\\Bundle\\FileImporterBundle\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Cooolinho\\FileImporterBundle\\Tests\\": "tests/"
+      "Cooolinho\\Bundle\\FileImporterBundle\\Tests\\": "tests/"
     }
   }
 }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Cooolinho\FileImporterBundle;
+namespace Cooolinho\Bundle\FileImporterBundle;
 
-use Cooolinho\FileImporterBundle\DependencyInjection\CooolinhoFileImporterExtension;
+use Cooolinho\Bundle\FileImporterBundle\DependencyInjection\CooolinhoFileImporterExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

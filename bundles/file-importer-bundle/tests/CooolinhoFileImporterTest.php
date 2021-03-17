@@ -1,6 +1,6 @@
 <?php
 
-namespace Cooolinho\FileImporterBundle\Tests;
+namespace Cooolinho\Bundle\FileImporterBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

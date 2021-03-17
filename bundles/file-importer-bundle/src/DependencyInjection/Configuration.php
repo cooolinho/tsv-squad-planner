@@ -1,8 +1,8 @@
 <?php
 
-namespace Cooolinho\FileImporterBundle\DependencyInjection;
+namespace Cooolinho\Bundle\FileImporterBundle\DependencyInjection;
 
-use Cooolinho\FileImporterBundle\CooolinhoFileImporterBundle;
+use Cooolinho\Bundle\FileImporterBundle\CooolinhoFileImporterBundle;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 

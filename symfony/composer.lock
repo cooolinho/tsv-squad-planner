@@ -85,7 +85,7 @@
             "dist": {
                 "type": "path",
                 "url": "../bundles/file-importer-bundle",
-                "reference": "b3fe196e26768c9dfbc83f7e1d6094fb681077cb"
+                "reference": "57c9b5498bbef2eede2335817d87fba0f2685960"
             },
             "require": {
                 "ext-ctype": "*",
@@ -102,12 +102,12 @@
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
-                    "Cooolinho\\FileImporterBundle\\": "src/"
+                    "Cooolinho\\Bundle\\FileImporterBundle\\": "src/"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "Cooolinho\\FileImporterBundle\\Tests\\": "tests/"
+                    "Cooolinho\\Bundle\\FileImporterBundle\\Tests\\": "tests/"
                 }
             },
             "license": [
@@ -7976,44 +7976,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "cooolinho/csv-importer-bundle",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "../bundles/csv-importer-bundle",
-                "reference": "78b079263fa35c4c0eedbc3cd42b92478f9e126d"
-            },
-            "require": {
-                "ext-ctype": "*",
-                "ext-iconv": "*",
-                "php": ">=7.4",
-                "symfony/console": "5.2.*",
-                "symfony/dotenv": "5.2.*",
-                "symfony/flex": "^1.3.1",
-                "symfony/framework-bundle": "5.2.*",
-                "symfony/security-bundle": "5.2.*",
-                "symfony/yaml": "5.2.*"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Cooolinho\\CSVImporterBundle\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Cooolinho\\CSVImporterBundle\\Tests\\": "tests/"
-                }
-            },
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "test reusable bundle",
-            "transport-options": {
-                "relative": true
-            }
-        },
         {
             "name": "doctrine/data-fixtures",
             "version": "1.5.0",
