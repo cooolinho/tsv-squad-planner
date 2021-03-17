@@ -2,7 +2,7 @@
 
 namespace App\Controller\Trainer;
 
-use App\Controller\AbstractSecurityController;
+use Cooolinho\Bundle\SecurityBundle\Controller\AbstractSecurityController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
