@@ -1,5 +1,5 @@
 {
-  "name": "cooolinho/csv-importer-bundle",
+  "name": "cooolinho/file-importer-bundle",
   "license": "GPL-2.0-only",
   "version": "1.0.0",
   "type": "symfony-bundle",
@@ -19,12 +19,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Cooolinho\\CSVImporterBundle\\": "src/"
+      "Cooolinho\\FileImporterBundle\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Cooolinho\\CSVImporterBundle\\Tests\\": "tests/"
+      "Cooolinho\\FileImporterBundle\\Tests\\": "tests/"
     }
   }
 }

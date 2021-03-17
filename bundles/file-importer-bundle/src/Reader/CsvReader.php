@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cooolinho\CSVImporterBundle\Reader;
+namespace Cooolinho\FileImporterBundle\Reader;
 
 use Iterator;
 use League\Csv\Exception;

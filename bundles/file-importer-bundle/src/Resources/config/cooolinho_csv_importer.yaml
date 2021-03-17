@@ -3,10 +3,10 @@ services:
         autowire: true
         autoconfigure: true
 
-    Cooolinho\CSVImporterBundle\:
+    Cooolinho\FileImporterBundle\:
         resource: '../../../src/*'
         exclude: '../../../src/{DependencyInjection,Resources,Tests}'
 
-    Cooolinho\CSVImporterBundle\Controller\:
+    Cooolinho\FileImporterBundle\Controller\:
         resource: '../../../src/Controller'
         tags: [ 'controller.service_arguments' ]

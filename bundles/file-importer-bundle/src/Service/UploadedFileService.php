@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cooolinho\CSVImporterBundle\Service;
+namespace Cooolinho\FileImporterBundle\Service;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;

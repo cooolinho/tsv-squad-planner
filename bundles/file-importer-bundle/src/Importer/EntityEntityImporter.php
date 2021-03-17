@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Cooolinho\CSVImporterBundle\Importer;
+namespace Cooolinho\FileImporterBundle\Importer;
 
-use Cooolinho\CSVImporterBundle\Reader\CsvReader;
+use Cooolinho\FileImporterBundle\Reader\CsvReader;
 use Doctrine\DBAL\Driver\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Iterator;

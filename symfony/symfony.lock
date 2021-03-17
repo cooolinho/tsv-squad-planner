@@ -5,6 +5,9 @@
     "cooolinho/csv-importer-bundle": {
         "version": "0.0.1"
     },
+    "cooolinho/file-importer-bundle": {
+        "version": "1.0.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

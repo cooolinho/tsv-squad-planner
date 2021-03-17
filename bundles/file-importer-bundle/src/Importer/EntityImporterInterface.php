@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cooolinho\CSVImporterBundle\Importer;
+namespace Cooolinho\FileImporterBundle\Importer;
 
 interface EntityImporterInterface extends ImporterInterface
 {

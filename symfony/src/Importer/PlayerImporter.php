@@ -6,7 +6,7 @@ namespace App\Importer;
 
 use App\Entity\Player;
 use App\Entity\Team;
-use Cooolinho\CSVImporterBundle\Importer\EntityEntityImporter;
+use Cooolinho\FileImporterBundle\Importer\EntityEntityImporter;
 use Exception;
 use Psr\Log\LogLevel;
 

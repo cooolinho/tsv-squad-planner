@@ -1,8 +1,8 @@
 <?php
 
-namespace Cooolinho\CSVImporterBundle\DependencyInjection;
+namespace Cooolinho\FileImporterBundle\DependencyInjection;
 
-use Cooolinho\CSVImporterBundle\CooolinhoCSVImporterBundle;
+use Cooolinho\FileImporterBundle\CooolinhoFileImporterBundle;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -10,7 +10,7 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder(CooolinhoCSVImporterBundle::CONFIGURATION_KEY);
+        $treeBuilder = new TreeBuilder(CooolinhoFileImporterBundle::CONFIGURATION_KEY);
 
         return $treeBuilder;
     }
