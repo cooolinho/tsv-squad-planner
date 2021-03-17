@@ -2,27 +2,20 @@
 
 declare(strict_types=1);
 
-namespace App\Importer\Entity;
+namespace App\Importer;
 
 use App\Entity\Player;
 use App\Entity\Team;
-use App\Importer\Importer;
+use Cooolinho\CSVImporterBundle\Importer\EntityEntityImporter;
 use Exception;
 use Psr\Log\LogLevel;
 
-class PlayerImporter extends Importer
+class PlayerImporter extends EntityEntityImporter
 {
     private const PROPERTY_LASTNAME = 'lastname';
     private const PROPERTY_FIRSTNAME = 'firstname';
     private const PROPERTY_BIRTHDAY = 'birthday';
     private const PROPERTY_TEAM = 'team';
-
-    protected static array $mapping = [
-        self::PROPERTY_LASTNAME => 0,
-        self::PROPERTY_FIRSTNAME => 1,
-        self::PROPERTY_BIRTHDAY => 2,
-        self::PROPERTY_TEAM => 3,
-    ];
 
     public function createEntityByMapping(array $data, array $mapping): Player
     {
@@ -48,5 +41,15 @@ class PlayerImporter extends Importer
         }
 
         return $player;
+    }
+
+    public static function getMapping(): array
+    {
+        return [
+            self::PROPERTY_LASTNAME => 0,
+            self::PROPERTY_FIRSTNAME => 1,
+            self::PROPERTY_BIRTHDAY => 2,
+            self::PROPERTY_TEAM => 3,
+        ];
     }
 }

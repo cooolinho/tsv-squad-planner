@@ -2,24 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Importer;
+namespace Cooolinho\CSVImporterBundle\Importer;
 
+use Cooolinho\CSVImporterBundle\Reader\CsvReader;
 use Doctrine\DBAL\Driver\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Iterator;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
-abstract class Importer
+abstract class EntityEntityImporter implements EntityImporterInterface
 {
-    public const FORMAT_CSV = 'csv';
-    protected static array $mapping = [
-        // 'property' => 'row index'
-    ];
-    private static bool $_error = false;
-    private static array $_entityCache = [];
     protected EntityManagerInterface $em;
     protected LoggerInterface $logger;
+    protected static array $entityCache = [];
+    protected static bool $error = false;
 
     public function __construct(EntityManagerInterface $em, LoggerInterface $logger)
     {
@@ -27,7 +24,9 @@ abstract class Importer
         $this->logger = $logger;
     }
 
-    public function import(Iterator $data, string $format = self::FORMAT_CSV): ?int
+    abstract public function createEntityByMapping(array $data, array $mapping): ?object;
+
+    public function import(Iterator $data, string $format = CsvReader::TYPE): ?int
     {
         $entities = [];
 
@@ -46,25 +45,23 @@ abstract class Importer
         } catch (Exception $e) {
             $this->logger->log(LogLevel::ERROR, $e->getMessage(), [__CLASS__, __DIR__, __FUNCTION__]);
 
-            self::$_error = true;
+            self::$error = true;
         }
 
-        return self::$_error ? null : count($entities);
+        return self::$error ? null : count($entities);
     }
 
     protected function createEntityByCSVRowData(array $data): ?object
     {
-        return $this->createEntityByMapping($data, static::$mapping);
+        return $this->createEntityByMapping($data, static::getMapping());
     }
-
-    abstract public function createEntityByMapping(array $data, array $mapping): ?object;
 
     protected function getAssociatedEntity(string $entityClassName, string $identifier, $property = 'identifier'): ?object
     {
         if (
-            array_key_exists($entityClassName . $identifier, self::$_entityCache)
-            && self::$_entityCache[$entityClassName . $identifier] instanceof $entityClassName) {
-            $entity = self::$_entityCache[$entityClassName . $identifier];
+            array_key_exists($entityClassName . $identifier, self::$entityCache)
+            && self::$entityCache[$entityClassName . $identifier] instanceof $entityClassName) {
+            $entity = self::$entityCache[$entityClassName . $identifier];
         } else {
             $entity = $this->em->getRepository($entityClassName)->findOneBy([$property => $identifier]);
         }
@@ -74,7 +71,7 @@ abstract class Importer
             $entity->setName($identifier);
         }
 
-        self::$_entityCache[$entityClassName . $identifier] = $entity;
+        self::$entityCache[$entityClassName . $identifier] = $entity;
 
         return $entity;
     }

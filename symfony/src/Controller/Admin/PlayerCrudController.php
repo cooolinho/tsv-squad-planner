@@ -4,9 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Player;
 use App\Form\PlayerUploadType;
-use App\Importer\CsvImporter;
-use App\Importer\Entity\PlayerImporter;
-use App\Service\UploadedFileService;
+use App\Importer\PlayerImporter;
+use Cooolinho\CSVImporterBundle\Reader\CsvReader;
+use Cooolinho\CSVImporterBundle\Service\UploadedFileService;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
@@ -26,19 +26,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class PlayerCrudController extends AbstractCrudController
 {
     private UploadedFileService $uploadedFileService;
-    private CsvImporter $csvImporter;
+    private CsvReader $csvReader;
     private PlayerImporter $importer;
     private TranslatorInterface $translator;
 
     public function __construct(
         UploadedFileService $uploadedFileService,
-        CsvImporter $csvImporter,
+        CsvReader $csvImporter,
         PlayerImporter $importer,
         TranslatorInterface $translator
     )
     {
         $this->uploadedFileService = $uploadedFileService;
-        $this->csvImporter = $csvImporter;
+        $this->csvReader = $csvImporter;
         $this->importer = $importer;
         $this->translator = $translator;
     }
@@ -95,7 +95,7 @@ class PlayerCrudController extends AbstractCrudController
             $format = $form->get(PlayerUploadType::FIELD_FORMAT)->getData();
 
             if ($file = $this->uploadedFileService->upload($file, $this->getParameter('csv_file_upload_directory'))) {
-                $data = $this->csvImporter->getIterableData($file);
+                $data = $this->csvReader->getIterableData($file);
 
                 $events = $this->importer->import($data, $format);
 

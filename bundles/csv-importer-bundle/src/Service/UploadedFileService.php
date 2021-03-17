@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Service;
+declare(strict_types=1);
+
+namespace Cooolinho\CSVImporterBundle\Service;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
@@ -20,7 +22,7 @@ class UploadedFileService
         $this->slugger = $slugger;
     }
 
-    public function upload(UploadedFile $file, $uploadDirectory): ?File
+    public function upload(UploadedFile $file, string $uploadDirectory): ?File
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $fileExtension = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
