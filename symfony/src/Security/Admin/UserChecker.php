@@ -2,8 +2,8 @@
 
 namespace App\Security\Admin;
 
-use App\Entity\User;
 use App\Exception\FalseLoginException;
+use Cooolinho\Bundle\SecurityBundle\Entity\User;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 

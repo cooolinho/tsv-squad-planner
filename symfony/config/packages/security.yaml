@@ -1,7 +1,7 @@
 security:
     enable_authenticator_manager: true
     encoders:
-        App\Entity\User:
+        Cooolinho\Bundle\SecurityBundle\Entity\User:
             algorithm: auto
         App\Entity\Trainer:
             algorithm: auto
@@ -9,7 +9,7 @@ security:
     providers:
         app_admin_provider:
             entity:
-                class: App\Entity\User
+                class: Cooolinho\Bundle\SecurityBundle\Entity\User
                 property: email
         app_trainer_provider:
             entity:

@@ -1,20 +1,20 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "9cc7df248d7de6c4fd50b1599d5035fb",
-    "packages": [
-        {
-            "name": "composer/package-versions-deprecated",
-            "version": "1.11.99.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/composer/package-versions-deprecated.git",
-                "reference": "7413f0b55a051e89485c5cb9f765fe24bb02a7b6"
-            },
-            "dist": {
+  "_readme": [
+    "This file locks the dependencies of your project to a known state",
+    "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+    "This file is @generated automatically"
+  ],
+  "content-hash": "02496c9af6cf1ac670557ed72f8d84e7",
+  "packages": [
+    {
+      "name": "composer/package-versions-deprecated",
+      "version": "1.11.99.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/composer/package-versions-deprecated.git",
+        "reference": "7413f0b55a051e89485c5cb9f765fe24bb02a7b6"
+      },
+      "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/composer/package-versions-deprecated/zipball/7413f0b55a051e89485c5cb9f765fe24bb02a7b6",
                 "reference": "7413f0b55a051e89485c5cb9f765fe24bb02a7b6",
@@ -118,20 +118,20 @@
             "description": "test reusable bundle",
             "time": "2021-03-17T19:48:54+00:00"
         },
-        {
-            "name": "cooolinho/symfony-security-bundle",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cooolinho/symfony-security-bundle.git",
-                "reference": "d796ca3e9e0ffb937aa6f486b6f7589cde71660e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cooolinho/symfony-security-bundle/zipball/d796ca3e9e0ffb937aa6f486b6f7589cde71660e",
-                "reference": "d796ca3e9e0ffb937aa6f486b6f7589cde71660e",
-                "shasum": ""
-            },
+    {
+      "name": "cooolinho/symfony-security-bundle",
+      "version": "1.0.4",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/cooolinho/symfony-security-bundle.git",
+        "reference": "206be4ec915f06f7a96d734667e21b2d34f5affc"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/cooolinho/symfony-security-bundle/zipball/206be4ec915f06f7a96d734667e21b2d34f5affc",
+        "reference": "206be4ec915f06f7a96d734667e21b2d34f5affc",
+        "shasum": ""
+      },
             "require": {
                 "cooolinho/symfony-ui-bundle": "^1.0",
                 "ext-ctype": "*",
@@ -161,22 +161,22 @@
                 "GPL-2.0-only"
             ],
             "description": "test reusable bundle",
-            "time": "2021-03-17T22:43:15+00:00"
+      "time": "2021-03-17T23:43:11+00:00"
         },
-        {
-            "name": "cooolinho/symfony-ui-bundle",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cooolinho/symfony-ui-bundle.git",
-                "reference": "5be3c5ce7b5779bf19e12282bb7b706ac4ccc445"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cooolinho/symfony-ui-bundle/zipball/5be3c5ce7b5779bf19e12282bb7b706ac4ccc445",
-                "reference": "5be3c5ce7b5779bf19e12282bb7b706ac4ccc445",
-                "shasum": ""
-            },
+    {
+      "name": "cooolinho/symfony-ui-bundle",
+      "version": "1.0.4",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/cooolinho/symfony-ui-bundle.git",
+        "reference": "a7884e8faf1c4ee51ab1f0b93b8bb5834e216f2a"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/cooolinho/symfony-ui-bundle/zipball/a7884e8faf1c4ee51ab1f0b93b8bb5834e216f2a",
+        "reference": "a7884e8faf1c4ee51ab1f0b93b8bb5834e216f2a",
+        "shasum": ""
+      },
             "require": {
                 "ext-ctype": "*",
                 "ext-iconv": "*",
@@ -203,7 +203,7 @@
                 "GPL-2.0-only"
             ],
             "description": "test reusable bundle",
-            "time": "2021-03-17T22:45:40+00:00"
+      "time": "2021-03-17T23:46:02+00:00"
         },
         {
             "name": "doctrine/annotations",

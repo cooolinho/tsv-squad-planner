@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\CredentialsTrait;
-use App\Entity\Traits\EmailTrait;
-use App\Entity\Traits\NameTrait;
-use App\Entity\Traits\RoleTrait;
 use App\Repository\TrainerRepository;
+use Cooolinho\Bundle\SecurityBundle\Entity\Traits\CredentialsTrait;
+use Cooolinho\Bundle\SecurityBundle\Entity\Traits\EmailTrait;
+use Cooolinho\Bundle\SecurityBundle\Entity\Traits\NameTrait;
+use Cooolinho\Bundle\SecurityBundle\Entity\Traits\RoleTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=TrainerRepository::class)
@@ -23,13 +24,13 @@ class Trainer implements UserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\OneToOne(targetEntity=Team::class, inversedBy="trainer", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $team;
+    private ?Team $team;
 
     public function __toString(): string
     {
