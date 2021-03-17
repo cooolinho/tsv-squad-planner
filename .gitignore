@@ -5,3 +5,6 @@
 
 # Symfony
 /symfony/public/uploads/
+
+# Bundles
+/bundles/
