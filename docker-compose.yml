@@ -12,7 +12,6 @@ services:
             - "9999:9999" # watch storefront
         volumes:
             - ./symfony:/var/www/html
-            - ./bundles:/var/www/bundles
         networks:
             - web
         links:
