@@ -1,20 +1,20 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "2b63fe60cdd3a83520956bfe9d9ab546",
-    "packages": [
-        {
-            "name": "composer/package-versions-deprecated",
-            "version": "1.11.99.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/composer/package-versions-deprecated.git",
-                "reference": "7413f0b55a051e89485c5cb9f765fe24bb02a7b6"
-            },
-            "dist": {
+  "_readme": [
+    "This file locks the dependencies of your project to a known state",
+    "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+    "This file is @generated automatically"
+  ],
+  "content-hash": "3f23440e9264e5ba15362a61ccf97977",
+  "packages": [
+    {
+      "name": "composer/package-versions-deprecated",
+      "version": "1.11.99.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/composer/package-versions-deprecated.git",
+        "reference": "7413f0b55a051e89485c5cb9f765fe24bb02a7b6"
+      },
+      "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/composer/package-versions-deprecated/zipball/7413f0b55a051e89485c5cb9f765fe24bb02a7b6",
                 "reference": "7413f0b55a051e89485c5cb9f765fe24bb02a7b6",
@@ -79,45 +79,45 @@
             ],
             "time": "2020-11-11T10:22:58+00:00"
         },
-        {
-            "name": "cooolinho/file-importer-bundle",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "../bundles/file-importer-bundle",
-                "reference": "57c9b5498bbef2eede2335817d87fba0f2685960"
-            },
-            "require": {
-                "ext-ctype": "*",
-                "ext-iconv": "*",
-                "league/csv": "^9.6",
+    {
+      "name": "cooolinho/file-importer-bundle",
+      "version": "1.0.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/cooolinho/file-importer-bundle.git",
+        "reference": "448ea690e1b9a2756e3ad6af238ba12a01a6d90c"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/cooolinho/file-importer-bundle/zipball/448ea690e1b9a2756e3ad6af238ba12a01a6d90c",
+        "reference": "448ea690e1b9a2756e3ad6af238ba12a01a6d90c",
+        "shasum": ""
+      },
+      "require": {
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "league/csv": "^9.6",
                 "php": ">=7.4",
                 "symfony/console": "5.2.*",
                 "symfony/dotenv": "5.2.*",
                 "symfony/flex": "^1.3.1",
-                "symfony/framework-bundle": "5.2.*",
-                "symfony/security-bundle": "5.2.*",
-                "symfony/yaml": "5.2.*"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Cooolinho\\Bundle\\FileImporterBundle\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Cooolinho\\Bundle\\FileImporterBundle\\Tests\\": "tests/"
-                }
-            },
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "description": "test reusable bundle",
-            "transport-options": {
-                "relative": true
-            }
-        },
+        "symfony/framework-bundle": "5.2.*",
+        "symfony/security-bundle": "5.2.*",
+        "symfony/yaml": "5.2.*"
+      },
+      "type": "symfony-bundle",
+      "autoload": {
+        "psr-4": {
+          "Cooolinho\\Bundle\\FileImporterBundle\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "GPL-2.0-only"
+      ],
+      "description": "test reusable bundle",
+      "time": "2021-03-17T01:49:18+00:00"
+    },
         {
             "name": "doctrine/annotations",
             "version": "1.12.1",
