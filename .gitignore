@@ -7,4 +7,5 @@
 /symfony/public/uploads/
 
 # Bundles
-/bundles/
+/bundles/*
+!/bundles/.gitkeep
