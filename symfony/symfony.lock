@@ -2,7 +2,7 @@
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
-    "cooolinho/file-importer-bundle": {
+    "cooolinho/symfony-file-importer-bundle": {
         "version": "1.0.4"
     },
     "cooolinho/symfony-security-bundle": {

@@ -8,7 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "composer/package-versions-deprecated": "1.11.99.1",
-        "cooolinho/file-importer-bundle": "^1.0",
+        "cooolinho/symfony-file-importer-bundle": "1.0.4",
         "cooolinho/symfony-security-bundle": "1.0.4",
         "cooolinho/symfony-ui-bundle": "1.0.4",
         "doctrine/annotations": "^1.0",
