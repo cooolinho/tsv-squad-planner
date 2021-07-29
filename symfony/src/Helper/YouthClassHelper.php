@@ -41,7 +41,7 @@ class YouthClassHelper
             self::MAX_AGE => 9,
         ],
         self::G => [
-            self::MAX_AGE => '7',
+            self::MAX_AGE => 7,
         ],
     ];
 

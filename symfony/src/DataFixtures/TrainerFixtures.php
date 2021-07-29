@@ -12,6 +12,9 @@ use Doctrine\Persistence\ObjectManager;
 
 class TrainerFixtures extends UserFixtures implements DependentFixtureInterface
 {
+    /**
+     * @throws \Exception
+     */
     public function load(ObjectManager $manager): void
     {
         foreach (YouthClassHelper::$youthTeams as $teamIdentifier => $youthTeam) {
@@ -20,6 +23,11 @@ class TrainerFixtures extends UserFixtures implements DependentFixtureInterface
             $trainer = new Trainer();
             $trainer->setFirstname(RandomHelper::getFirstname());
             $trainer->setLastname(RandomHelper::getLastname());
+            $trainer->setStreet('Demo-Street');
+            $trainer->setStreetNr(RandomHelper::getInt());
+            $trainer->setZip('12345');
+            $trainer->setCity('Demo City');
+            $trainer->setPhone('0123456789');
             $trainer->setEmail($trainerName . '@example.com');
             $trainer->setPlainPassword('secret');
             $trainer->addRole(Trainer::ROLE_TRAINER);

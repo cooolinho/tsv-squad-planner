@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Club;
 use App\Entity\Player;
 use App\Entity\Team;
 use App\Entity\Trainer;
@@ -32,10 +33,18 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Players', 'fas fa-list', Player::class)
+        yield MenuItem::linkToRoute('Planner', 'fas fa-calculator', 'squad_planner_index');
+
+        yield MenuItem::section('Database');
+        yield MenuItem::linkToCrud('Players', 'fas fa-user', Player::class)
             ->setController(PlayerCrudController::class);
-        yield MenuItem::linkToCrud('Teams', 'fas fa-list', Team::class);
-        yield MenuItem::linkToCrud('Trainer', 'fas fa-list', Trainer::class);
-        yield MenuItem::linkToRoute('Planner', 'fas fa-list', 'squad_planner_index');
+        yield MenuItem::linkToCrud('Teams', 'fas fa-users', Team::class);
+        yield MenuItem::linkToCrud('Clubs', 'fas fa-church', Club::class);
+
+        yield MenuItem::section('Configuration');
+        yield MenuItem::linkToCrud('Trainer', 'fas fa-user-secret', Trainer::class);
+
+        yield MenuItem::section();
+        yield MenuItem::linkToLogout('Logout', 'fas fa-sign-out-alt');
     }
 }

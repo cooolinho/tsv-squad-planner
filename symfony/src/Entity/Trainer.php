@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\AddressTrait;
+use App\Entity\Traits\PhoneTrait;
+use App\Entity\Traits\PlainPasswordTrait;
 use App\Repository\TrainerRepository;
 use Cooolinho\Bundle\SecurityBundle\Entity\Traits\CredentialsTrait;
 use Cooolinho\Bundle\SecurityBundle\Entity\Traits\EmailTrait;
@@ -15,7 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Trainer implements UserInterface
 {
-    use NameTrait, RoleTrait, EmailTrait, CredentialsTrait;
+    use NameTrait, RoleTrait, EmailTrait, CredentialsTrait, AddressTrait, PlainPasswordTrait, PhoneTrait;
 
     public const ROLE_TRAINER = 'ROLE_TRAINER';
 
@@ -31,11 +34,15 @@ class Trainer implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private ?Team $team = null;
-    protected ?string $plainPassword;
+
+    public function __construct()
+    {
+        $this->addRole(self::ROLE_TRAINER);
+    }
 
     public function __toString(): string
     {
-        return $this->getUsername();
+        return $this->getFullname();
     }
 
     public function getId(): ?int
@@ -51,18 +58,6 @@ class Trainer implements UserInterface
     public function setTeam(Team $team): self
     {
         $this->team = $team;
-
-        return $this;
-    }
-
-    public function getPlainPassword(): string
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword(string $plainPassword): self
-    {
-        $this->plainPassword = $plainPassword;
 
         return $this;
     }
