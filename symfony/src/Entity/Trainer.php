@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Trainer implements UserInterface
 {
-    use RoleTrait, EmailTrait, CredentialsTrait, NameTrait;
+    use NameTrait, RoleTrait, EmailTrait, CredentialsTrait;
 
     public const ROLE_TRAINER = 'ROLE_TRAINER';
 
@@ -30,7 +30,8 @@ class Trainer implements UserInterface
      * @ORM\OneToOne(targetEntity=Team::class, inversedBy="trainer", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?Team $team;
+    private ?Team $team = null;
+    protected ?string $plainPassword;
 
     public function __toString(): string
     {
@@ -50,6 +51,18 @@ class Trainer implements UserInterface
     public function setTeam(Team $team): self
     {
         $this->team = $team;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }

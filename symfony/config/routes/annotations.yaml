@@ -5,3 +5,7 @@ controllers:
 kernel:
     resource: ../../src/Kernel.php
     type: annotation
+
+cooolinho_security:
+    resource: ../../vendor/cooolinho/symfony-security-bundle/src/Controller/
+    type: annotation

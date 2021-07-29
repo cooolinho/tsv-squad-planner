@@ -26,12 +26,16 @@ security:
             lazy: true
             pattern: ^/admin
             provider: all_users
-            user_checker: App\Security\Admin\UserChecker
+            user_checker: Cooolinho\Bundle\SecurityBundle\Security\UserChecker
             custom_authenticator:
-                - App\Security\Admin\Authenticator
+                - Cooolinho\Bundle\SecurityBundle\Security\SecurityAuthenticator
             logout:
                 path: admin_logout
                 target: home
+            form_login:
+                login_path: admin_login
+                check_path: admin_login
+
         secured_trainer_area:
             lazy: true
             pattern: ^/trainer

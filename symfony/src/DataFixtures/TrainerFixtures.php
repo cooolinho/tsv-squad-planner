@@ -2,9 +2,11 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Team;
 use App\Entity\Trainer;
 use App\Helper\RandomHelper;
 use App\Helper\YouthClassHelper;
+use Cooolinho\Bundle\SecurityBundle\DataFixtures\UserFixtures;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
@@ -18,8 +20,11 @@ class TrainerFixtures extends UserFixtures implements DependentFixtureInterface
             $trainer = new Trainer();
             $trainer->setFirstname(RandomHelper::getFirstname());
             $trainer->setLastname(RandomHelper::getLastname());
-            $this->addDemoUserData($trainer, $trainerName, Trainer::ROLE_TRAINER);
+            $trainer->setEmail($trainerName . '@example.com');
+            $trainer->setPlainPassword('secret');
+            $trainer->addRole(Trainer::ROLE_TRAINER);
 
+            /** @var Team $team */
             $team = $this->getReference($teamIdentifier);
             $team->setTrainer($trainer);
 

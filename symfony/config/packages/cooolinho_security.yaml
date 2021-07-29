@@ -1,0 +1,3 @@
+cooolinho_security:
+    route_login: admin_login
+    route_after_login: admin_dashboard

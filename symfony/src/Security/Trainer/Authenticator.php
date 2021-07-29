@@ -4,9 +4,9 @@ namespace App\Security\Trainer;
 
 use App\Controller\Trainer\DashboardController as TrainerDashboardController;
 use App\Controller\Trainer\SecurityController as TrainerSecurityController;
-use App\Security\AbstractAuthenticator;
+use Cooolinho\Bundle\SecurityBundle\Security\SecurityAuthenticator;
 
-class Authenticator extends AbstractAuthenticator
+class Authenticator extends SecurityAuthenticator
 {
     protected function getLoginRoute(): string
     {

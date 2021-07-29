@@ -2,12 +2,12 @@
 
 namespace App\Controller\Trainer;
 
-use Cooolinho\Bundle\SecurityBundle\Controller\AbstractSecurityController;
+use Cooolinho\Bundle\SecurityBundle\Controller\SecurityController as BaseSecurityController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class SecurityController extends AbstractSecurityController
+class SecurityController extends BaseSecurityController
 {
     public const ROUTE_LOGIN = 'trainer_login';
 
