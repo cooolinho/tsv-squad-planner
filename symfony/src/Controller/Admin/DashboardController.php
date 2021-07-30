@@ -11,10 +11,18 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DashboardController extends AbstractDashboardController
 {
     public const ROUTE_INDEX = 'admin_dashboard';
+
+    private TranslatorInterface $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
 
     /**
      * @Route("/admin", name="admin_dashboard")
@@ -27,24 +35,44 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('TSV Squad Planner');
+            ->setTitle($this->translator->trans('menu.dashboard.title'));
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToRoute('Planner', 'fas fa-calculator', 'squad_planner_index');
+        yield MenuItem::linktoDashboard($this->translator->trans('menu.dashboard.label'), 'fa fa-home');
 
-        yield MenuItem::section('Database');
-        yield MenuItem::linkToCrud('Players', 'fas fa-user', Player::class)
-            ->setController(PlayerCrudController::class);
-        yield MenuItem::linkToCrud('Teams', 'fas fa-users', Team::class);
-        yield MenuItem::linkToCrud('Clubs', 'fas fa-church', Club::class);
+        yield MenuItem::section($this->translator->trans('menu.section.planner'));
+        yield MenuItem::linkToRoute(
+            $this->translator->trans('menu.planner'),
+            'fas fa-calculator', 'squad_planner_index'
+        );
 
-        yield MenuItem::section('Configuration');
-        yield MenuItem::linkToCrud('Trainer', 'fas fa-user-secret', Trainer::class);
+        yield MenuItem::section($this->translator->trans('menu.section.database'));
+        yield MenuItem::linkToCrud(
+            $this->translator->trans('menu.entity.player'),
+            'fas fa-user',
+            Player::class
+        )->setController(PlayerCrudController::class);
 
-        yield MenuItem::section();
-        yield MenuItem::linkToLogout('Logout', 'fas fa-sign-out-alt');
+        yield MenuItem::linkToCrud(
+            $this->translator->trans('menu.entity.team'),
+            'fas fa-users',
+            Team::class
+        );
+        yield MenuItem::linkToCrud(
+            $this->translator->trans('menu.entity.club'),
+            'fas fa-church', Club::class
+        );
+
+        yield MenuItem::section($this->translator->trans('menu.section.configuration'));
+        yield MenuItem::linkToCrud(
+            $this->translator->trans('menu.entity.trainer'),
+            'fas fa-user-secret',
+            Trainer::class
+        );
+
+        yield MenuItem::section($this->translator->trans('menu.section.account'));
+        yield MenuItem::linkToLogout($this->translator->trans('menu.logout'), 'fas fa-sign-out-alt');
     }
 }

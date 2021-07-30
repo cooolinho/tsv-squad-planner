@@ -33,8 +33,10 @@ class PlayerCrudController extends AdminPlayerCrudController
         $formBuilder = parent::createNewFormBuilder($entityDto, $formOptions, $context);
 
         $team = $this->getTeamByUser();
-        $minAgeDate = YouthClassHelper::getMinAgeByYouthClass($team->getIdentifier());
-        $maxAgeDate = YouthClassHelper::getMaxAgeByYouthClass($team->getIdentifier());
+        $youthClass = strtoupper($team->getIdentifier());
+
+        $minAgeDate = YouthClassHelper::getMinAgeByYouthClass($youthClass);
+        $maxAgeDate = YouthClassHelper::getMaxAgeByYouthClass($youthClass);
 
         $formBuilder->add('birthday', DateType::Class, [
             'widget' => 'choice',

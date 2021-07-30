@@ -1,0 +1,139 @@
+contact:
+    firstname:
+        label: Vorname
+    lastname:
+        label: Nachname
+    birthday:
+        label: Geburtstag
+    phone:
+        label: Telefon
+    street:
+        label: Straße
+    street_nr:
+        label: Hausnummer
+    zip:
+        label: PLZ
+    city:
+        label: Ort
+    email:
+        label: E-Mail
+player:
+    label:
+        singular: Spieler
+        plural: Spieler
+    team:
+        label: Mannschaft
+    club:
+        label: Verein
+    foot:
+        label: 'starker Fuß'
+        unknown: Unbekannt
+        left: 'Linker Fuß'
+        right: 'Rechter Fuß'
+        both: Beidfüßig
+    clothing:
+        desired_size:
+            label: Wunschgröße
+            help: 'Gebe eine Wunschgröße an z.b X, XL, 160'
+        trainings_jacket:
+            label: 'Trainings-Anzug Jacke'
+        trainings_trousers:
+            label: 'Trainings-Anzug Hose'
+        warm_up_shirt:
+            label: Aufwärmshirt
+        warm_up_sweater:
+            label: Aufwärmpullover
+        fit_size:
+            unknown: Unbekannt
+            to_small: 'Zu Klein'
+            fits: Passt
+    panel:
+        personal_information: 'Persönliche Informationen'
+        contact_information: 'Kontakt Informationen'
+        attributes: 'Spieler Eigenschaften'
+        clothing: 'Spieler Kleidung'
+club:
+    name:
+        label: Vereinsname
+menu:
+    dashboard:
+        title: 'TSV Mannschafts-Planer'
+        label: Dashboard
+    planner: Mannschaftsplaner
+    section:
+        planner: Services
+        database: Datenbank
+        configuration: Konfiguration
+        account: 'Mein Account'
+    entity:
+        player: Spieler
+        team: Mannschaften
+        club: Vereine
+        trainer: Trainer
+    logout: Ausloggen
+entity:
+    panel:
+        timestamps: Zeitstempel
+    created_at:
+        label: 'Erstellt am'
+    updated_at:
+        label: 'Aktualisiert am'
+team:
+    label: Mannschaft
+    name:
+        label: Mannschaftsname
+    players:
+        label: Spieler
+    trainer:
+        label: Trainer
+    label.singular: Mannschaft
+    label.plural: Mannschaften
+trainer:
+    label:
+        singular: Trainer
+        plural: Trainer
+    team:
+        label: Mannschaft
+    panel:
+        personal_information: 'Persönliche Informationen'
+        contact_information: 'Kontakt Informationen'
+        password: 'Trainer Passwort'
+page:
+    club:
+        title:
+            index: 'Vereine - Übersicht'
+            detail: 'Verein - Details'
+            edit: 'Verein - Bearbeiten'
+            new: 'Neuen Verein anlegen'
+    player:
+        title:
+            index: 'Spieler - Übersicht'
+            detail: 'Spieler - Details'
+            edit: 'Spieler - Bearbeiten'
+            new: 'Neuen Spieler anelegen'
+    team:
+        title:
+            index: 'Mannschaften - Übersicht'
+            detail: 'Mannschaft - Details'
+            edit: 'Mannschaft - Bearbeiten'
+            new: 'Neue Mannschaft anlegen'
+    trainer:
+        title:
+            index: 'Trainer - Übersicht'
+            detail: 'Trainer Details'
+            edit: 'Trainer bearbeiten'
+            new: 'Neuen Trainer anlegen'
+import:
+    file_upload:
+        title: 'Lade eine Datei hoch'
+        submit: 'Datei hochladen'
+    template:
+        title: 'Datei Vorlage'
+        info: 'Alle anderen Spalten werden ignoriert!'
+    submit:
+        label: 'Spieler importieren'
+    error:
+        file_import_error: 'Fehler beim Importieren der Datei'
+    notify:
+        no_entries_found: 'Keine Einträge gefunden'
+        events_imported: '%count% Spieler importiert'

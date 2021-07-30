@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Traits\AddressTrait;
 use App\Entity\Traits\PhoneTrait;
+use App\Entity\Traits\TimestampTrait;
 use App\Repository\PlayerRepository;
 use Cooolinho\Bundle\SecurityBundle\Entity\Traits\BirthdayTrait;
 use Cooolinho\Bundle\SecurityBundle\Entity\Traits\NameTrait;
@@ -11,10 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PlayerRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Player
 {
-    use BirthdayTrait, NameTrait, AddressTrait, PhoneTrait;
+    use BirthdayTrait, NameTrait, AddressTrait, PhoneTrait, TimestampTrait;
 
     public const FOOT_UNKNOWN = 0;
     public const FOOT_LEFT = 1;
@@ -84,6 +86,11 @@ class Player
      * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="players")
      */
     private ?Club $club;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function __toString(): string
     {

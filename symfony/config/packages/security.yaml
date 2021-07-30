@@ -46,6 +46,9 @@ security:
             logout:
                 path: trainer_logout
                 target: home
+            form_login:
+                login_path: trainer_login
+                check_path: trainer_login
 
     role_hierarchy:
         ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]

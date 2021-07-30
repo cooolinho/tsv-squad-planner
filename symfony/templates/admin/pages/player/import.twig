@@ -7,7 +7,7 @@
         <div class="col-sm-12 col-md-6">
             <div class="card">
                 <div class="card-header">
-                    {{ 'label.file_upload'|trans }}
+                    {{ 'import.file_upload.title'|trans }}
                 </div>
                 <div class="card-body">
                     {{ form_start(form) }}
@@ -20,20 +20,20 @@
         <div class="col-sm-12 col-md-6">
             <div class="card">
                 <div class="card-header">
-                    {{ 'Template for csv file'|trans }}
+                    {{ 'import.template.title'|trans }}
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info">
-                        {{ 'All other Rows will be igonred'|trans|raw }}
+                        {{ 'import.template.info'|trans|raw }}
                     </div>
                     <br>
                     <table class="table table-bordered table-sm">
                         <thead>
                         <tr>
-                            <th>{{ 'Firstname'|trans }}</th>
-                            <th>{{ 'Lastname'|trans }}</th>
-                            <th>{{ 'Birthday'|trans }}</th>
-                            <th>{{ 'Team'|trans }}</th>
+                            <th>{{ 'contact.firstname.label'|trans }}</th>
+                            <th>{{ 'contact.lastname.label'|trans }}</th>
+                            <th>{{ 'contact.birthday.label'|trans }}</th>
+                            <th>{{ 'player.team.label'|trans }}</th>
                         </tr>
                         </thead>
                         <tbody>

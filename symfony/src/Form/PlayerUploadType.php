@@ -31,7 +31,7 @@ class PlayerUploadType extends AbstractType
                 'placeholder' => 'label.choose',
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'label.import',
+                'label' => 'import.file_upload.submit',
             ]);
     }
 

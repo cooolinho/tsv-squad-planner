@@ -6,6 +6,7 @@
     {% set url = ea_url()
         .setController('App\\Controller\\Admin\\PlayerCrudController')
         .setAction('import') %}
-    <a class="action-new btn btn-primary" href="{{ url }}"><i class="fas fa-file-import"></i> {{ 'label.import'|trans }}
+    <a class="action-new btn btn-primary" href="{{ url }}"><i
+                class="fas fa-file-import"></i> {{ 'import.submit.label'|trans }}
     </a>
 {% endblock %}

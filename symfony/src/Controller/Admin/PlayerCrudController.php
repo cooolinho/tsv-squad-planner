@@ -2,7 +2,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\Fields\AddressFields;
+use App\Controller\Admin\Traits\CrudFieldsAddressTrait;
+use App\Controller\Admin\Traits\CrudFieldsTimestampTrait;
 use App\Entity\Player;
 use App\Form\PlayerUploadType;
 use App\Importer\PlayerImporter;
@@ -30,6 +31,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PlayerCrudController extends AbstractCrudController
 {
+    use CrudFieldsAddressTrait, CrudFieldsTimestampTrait;
+
     private UploadedFileService $uploadedFileService;
     private CsvReader $csvReader;
     private PlayerImporter $importer;
@@ -55,69 +58,93 @@ class PlayerCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield AssociationField::new('team', 'player.team.label');
-        yield AssociationField::new('club', 'player.club.label');
+        $playerAssociationFields = [
+            AssociationField::new('team', $this->translator->trans('player.team.label')),
+            AssociationField::new('club', $this->translator->trans('player.club.label')),
+        ];
 
-        yield FormField::addPanel('Personal Information');
-        yield TextField::new('firstname', 'player.firstname.label');
-        yield TextField::new('lastname', 'player.lastname.label');
-        AddressFields::addAll();
+        $playerPersonalInformation = array_merge([
+            FormField::addPanel($this->translator->trans('player.panel.personal_information')),
+            TextField::new('firstname', $this->translator->trans('contact.firstname.label')),
+            TextField::new('lastname', $this->translator->trans('contact.lastname.label')),
+        ], $this->getAddressFields());
 
-        yield FormField::addPanel('Contact Information');
-        yield TextField::new('phone', 'player.phone.label');
+        $playerContactInformation = [
+            FormField::addPanel($this->translator->trans('player.panel.contact_information')),
+            TextField::new('phone', $this->translator->trans('contact.phone.label')),
+        ];
 
-        yield FormField::addPanel('Attributes');
-        yield ChoiceField::new('foot', 'player.foot.label')
-            ->autocomplete()
-            ->setChoices(Player::$footChoices)
-            ->hideOnIndex();
+        $playerAttributes = [
+            FormField::addPanel($this->translator->trans('player.panel.attributes')),
+            ChoiceField::new('foot', $this->translator->trans('player.foot.label'))
+                ->autocomplete()
+                ->setChoices(Player::$footChoices)
+                ->hideOnIndex(),
+        ];
 
-        yield FormField::addPanel('Clothing');
-        yield ChoiceField::new('trainingsJacket', 'player.clothing.trainings_jacket')
-            ->autocomplete()
-            ->setChoices(Player::$clothingFitSizeChoices)
-            ->hideOnIndex();
-        yield ChoiceField::new('trainingsTrousers', 'player.clothing.trainings_trousers')
-            ->autocomplete()
-            ->setChoices(Player::$clothingFitSizeChoices)
-            ->hideOnIndex();
-        yield ChoiceField::new('warmUpShirt', 'player.clothing.warm_up_shirt')
-            ->autocomplete()
-            ->setChoices(Player::$clothingFitSizeChoices)
-            ->hideOnIndex();
-        yield ChoiceField::new('warmUpSweater', 'player.clothing.warm_up_sweater')
-            ->autocomplete()
-            ->setChoices(Player::$clothingFitSizeChoices)
-            ->hideOnIndex();
-        yield TextField::new('clothingDesiredSize', 'player.clothing.desired_size.label')
-            ->setHelp('player.clothing.desired_size.help')
-            ->hideOnIndex();
+        $playerClothings = [
+            FormField::addPanel($this->translator->trans('player.panel.clothing')),
+            ChoiceField::new('trainingsJacket', $this->translator->trans('player.clothing.trainings_jacket.label'))
+                ->autocomplete()
+                ->setChoices(Player::$clothingFitSizeChoices)
+                ->hideOnIndex(),
+            ChoiceField::new('trainingsTrousers', $this->translator->trans('player.clothing.trainings_trousers.label'))
+                ->autocomplete()
+                ->setChoices(Player::$clothingFitSizeChoices)
+                ->hideOnIndex(),
+            ChoiceField::new('warmUpShirt', $this->translator->trans('player.clothing.warm_up_shirt.label'))
+                ->autocomplete()
+                ->setChoices(Player::$clothingFitSizeChoices)
+                ->hideOnIndex(),
+            ChoiceField::new('warmUpSweater', $this->translator->trans('player.clothing.warm_up_sweater.label'))
+                ->autocomplete()
+                ->setChoices(Player::$clothingFitSizeChoices)
+                ->hideOnIndex(),
+            TextField::new('clothingDesiredSize', $this->translator->trans('player.clothing.desired_size.label'))
+                ->setHelp($this->translator->trans('player.clothing.desired_size.help'))
+                ->hideOnIndex(),
+        ];
+
+        $timestampFields = [
+            $this->getTimestampPanel()->hideOnIndex()->hideOnForm(),
+            $this->getCreatedAtField()->hideOnIndex()->hideOnForm(),
+            $this->getUpdatedAtField()->hideOnIndex()->hideOnForm(),
+        ];
+
+        return array_merge(
+            $playerAssociationFields,
+            $playerPersonalInformation,
+            $playerContactInformation,
+            $playerAttributes,
+            $playerClothings,
+            $timestampFields,
+        );
     }
 
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
-            ->add(EntityFilter::new('team', 'player.team.label'))
-            ->add(EntityFilter::new('club', 'player.club.label'))
-            ->add(DateTimeFilter::new('birthday', 'player.birthday.label'))
+            ->add(EntityFilter::new('team', $this->translator->trans('player.team.label')))
+            ->add(EntityFilter::new('club', $this->translator->trans('player.club.label')))
+            ->add(DateTimeFilter::new('birthday', $this->translator->trans('contact.birthday.label')))
             ->add(
-                ChoiceFilter::new('foot', 'player.foot.label')
+                ChoiceFilter::new('foot', $this->translator->trans('player.foot.label'))
                     ->setChoices(Player::$footChoices)
             )
             ->add(
-                ChoiceFilter::new('trainingsJacket', 'player.clothing.trainings_jacket')
+                ChoiceFilter::new('trainingsJacket', $this->translator->trans('player.clothing.trainings_jacket.label'))
                     ->setChoices(Player::$clothingFitSizeChoices)
             )
             ->add(
-                ChoiceFilter::new('trainingsTrousers', 'player.clothing.trainings_trousers')
+                ChoiceFilter::new('trainingsTrousers', $this->translator->trans('player.clothing.trainings_trousers.label'))
                     ->setChoices(Player::$clothingFitSizeChoices)
             )
             ->add(
-                ChoiceFilter::new('warmUpShirt', 'player.clothing.warm_up_shirt')
+                ChoiceFilter::new('warmUpShirt', $this->translator->trans('player.clothing.warm_up_shirt.label'))
                     ->setChoices(Player::$clothingFitSizeChoices)
             )
             ->add(
-                ChoiceFilter::new('warmUpSweater', 'player.clothing.warm_up_sweater')
+                ChoiceFilter::new('warmUpSweater', $this->translator->trans('player.clothing.warm_up_sweater.label'))
                     ->setChoices(Player::$clothingFitSizeChoices)
             );
     }
@@ -126,7 +153,13 @@ class PlayerCrudController extends AbstractCrudController
     {
         return $crud
             ->setDefaultSort(['firstname' => 'ASC', 'lastname' => 'ASC', 'birthday' => 'ASC'])
-            ->setPaginatorPageSize(30);
+            ->setPaginatorPageSize(30)
+            ->setPageTitle(Crud::PAGE_INDEX, $this->translator->trans('page.player.title.index'))
+            ->setPageTitle(Crud::PAGE_DETAIL, $this->translator->trans('page.player.title.detail'))
+            ->setPageTitle(Crud::PAGE_EDIT, $this->translator->trans('page.player.title.edit'))
+            ->setPageTitle(Crud::PAGE_NEW, $this->translator->trans('page.player.title.new'))
+            ->setEntityLabelInSingular($this->translator->trans('player.label.singular'))
+            ->setEntityLabelInPlural($this->translator->trans('player.label.plural'));
     }
 
     public function configureActions(Actions $actions): Actions
@@ -159,14 +192,14 @@ class PlayerCrudController extends AbstractCrudController
                 $events = $this->importer->import($data, $format);
 
                 if ($events === null) {
-                    $this->addFlash(LogLevel::ERROR, $this->translator->trans('error.file_import'));
+                    $this->addFlash(LogLevel::ERROR, $this->translator->trans('import.error.file_import_error'));
                 }
 
                 if (is_int($events)) {
                     if ($events === 0) {
-                        $this->addFlash(LogLevel::WARNING, $this->translator->trans('label.no_entries_found'));
+                        $this->addFlash(LogLevel::WARNING, $this->translator->trans('import.notify.no_entries_found'));
                     } else {
-                        $this->addFlash(LogLevel::WARNING, $this->translator->trans('notify.events_imported', [
+                        $this->addFlash(LogLevel::WARNING, $this->translator->trans('import.notify.events_imported', [
                             '%count%' => $events,
                         ]));
                     }
@@ -184,5 +217,10 @@ class PlayerCrudController extends AbstractCrudController
             'form' => $form->createView(),
             'players' => $players,
         ]);
+    }
+
+    public function getTranslator(): TranslatorInterface
+    {
+        return $this->translator;
     }
 }

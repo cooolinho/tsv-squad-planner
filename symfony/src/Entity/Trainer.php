@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Traits\AddressTrait;
 use App\Entity\Traits\PhoneTrait;
 use App\Entity\Traits\PlainPasswordTrait;
+use App\Entity\Traits\TimestampTrait;
 use App\Repository\TrainerRepository;
 use Cooolinho\Bundle\SecurityBundle\Entity\Traits\CredentialsTrait;
 use Cooolinho\Bundle\SecurityBundle\Entity\Traits\EmailTrait;
@@ -15,10 +16,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=TrainerRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Trainer implements UserInterface
 {
-    use NameTrait, RoleTrait, EmailTrait, CredentialsTrait, AddressTrait, PlainPasswordTrait, PhoneTrait;
+    use NameTrait, RoleTrait, EmailTrait, CredentialsTrait, AddressTrait, PlainPasswordTrait, PhoneTrait, TimestampTrait;
 
     public const ROLE_TRAINER = 'ROLE_TRAINER';
 
