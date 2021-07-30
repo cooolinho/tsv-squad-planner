@@ -42,12 +42,6 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard($this->translator->trans('menu.dashboard.label'), 'fa fa-home');
 
-        yield MenuItem::section($this->translator->trans('menu.section.planner'));
-        yield MenuItem::linkToRoute(
-            $this->translator->trans('menu.planner'),
-            'fas fa-calculator', 'squad_planner_index'
-        );
-
         yield MenuItem::section($this->translator->trans('menu.section.database'));
         yield MenuItem::linkToCrud(
             $this->translator->trans('menu.entity.player'),

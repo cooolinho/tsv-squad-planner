@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Controller\Admin\Filter\ModifyYearsFilter;
+use App\Controller\Admin\Filter\YouthClassFilter;
 use App\Controller\Admin\Traits\CrudFieldsAddressTrait;
 use App\Controller\Admin\Traits\CrudFieldsTimestampTrait;
 use App\Entity\Player;
@@ -9,6 +11,7 @@ use App\Form\PlayerUploadType;
 use App\Importer\PlayerImporter;
 use Cooolinho\Bundle\FileImporterBundle\Reader\CsvReader;
 use Cooolinho\Bundle\FileImporterBundle\Service\UploadedFileService;
+use Cooolinho\Bundle\SecurityBundle\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -17,6 +20,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
@@ -33,10 +37,10 @@ class PlayerCrudController extends AbstractCrudController
 {
     use CrudFieldsAddressTrait, CrudFieldsTimestampTrait;
 
-    private UploadedFileService $uploadedFileService;
-    private CsvReader $csvReader;
-    private PlayerImporter $importer;
-    private TranslatorInterface $translator;
+    protected UploadedFileService $uploadedFileService;
+    protected CsvReader $csvReader;
+    protected PlayerImporter $importer;
+    protected TranslatorInterface $translator;
 
     public function __construct(
         UploadedFileService $uploadedFileService,
@@ -67,6 +71,7 @@ class PlayerCrudController extends AbstractCrudController
             FormField::addPanel($this->translator->trans('player.panel.personal_information')),
             TextField::new('firstname', $this->translator->trans('contact.firstname.label')),
             TextField::new('lastname', $this->translator->trans('contact.lastname.label')),
+            DateField::new('birthday', $this->translator->trans('contact.birthday.label')),
         ], $this->getAddressFields());
 
         $playerContactInformation = [
@@ -146,7 +151,9 @@ class PlayerCrudController extends AbstractCrudController
             ->add(
                 ChoiceFilter::new('warmUpSweater', $this->translator->trans('player.clothing.warm_up_sweater.label'))
                     ->setChoices(Player::$clothingFitSizeChoices)
-            );
+            )
+            ->add(YouthClassFilter::new('youthClass', $this->translator->trans('player.filter.youth_class.label')))
+            ->add(ModifyYearsFilter::new('modifyYears', $this->translator->trans('player.filter.youth_class.modify_years')));
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -159,19 +166,23 @@ class PlayerCrudController extends AbstractCrudController
             ->setPageTitle(Crud::PAGE_EDIT, $this->translator->trans('page.player.title.edit'))
             ->setPageTitle(Crud::PAGE_NEW, $this->translator->trans('page.player.title.new'))
             ->setEntityLabelInSingular($this->translator->trans('player.label.singular'))
-            ->setEntityLabelInPlural($this->translator->trans('player.label.plural'));
+            ->setEntityLabelInPlural($this->translator->trans('player.label.plural'))
+            ->showEntityActionsAsDropdown();
     }
 
     public function configureActions(Actions $actions): Actions
     {
-        return $actions->add(Crud::PAGE_INDEX, Action::DETAIL);
+        return $actions
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->setPermission(Action::EDIT, User::ROLE_ADMIN)
+            ->setPermission(Action::DELETE, User::ROLE_ADMIN);
     }
 
     public function index(AdminContext $context): Response
     {
         return $this->render(
             '@admin/pages/player/index.twig',
-            array_merge(parent::index($context)->all(), [])
+            array_merge(parent::index($context)->all())
         );
     }
 

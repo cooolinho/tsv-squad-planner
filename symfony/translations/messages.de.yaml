@@ -52,6 +52,10 @@ player:
         contact_information: 'Kontakt Informationen'
         attributes: 'Spieler Eigenschaften'
         clothing: 'Spieler Kleidung'
+    filter:
+        youth_class:
+            label: Altersgruppe
+            modify_years: 'Jahre hinzufügen'
 club:
     name:
         label: Vereinsname
@@ -71,6 +75,8 @@ menu:
         club: Vereine
         trainer: Trainer
     logout: Ausloggen
+    trainer:
+        my_players: 'Meine Spieler'
 entity:
     panel:
         timestamps: Zeitstempel

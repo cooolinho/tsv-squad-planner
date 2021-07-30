@@ -5,11 +5,14 @@ namespace App\Controller\Trainer;
 use App\Controller\Admin\PlayerCrudController as AdminPlayerCrudController;
 use App\Entity\Player;
 use App\Entity\Team;
+use App\Entity\Trainer;
 use App\Exception\TeamNotFoundException;
 use App\Helper\YouthClassHelper;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
@@ -26,6 +29,23 @@ class PlayerCrudController extends AdminPlayerCrudController
         $queryBuilder = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
 
         return $this->filterPlayersByTrainer($queryBuilder);
+    }
+
+    private function filterPlayersByTrainer(QueryBuilder $queryBuilder): QueryBuilder
+    {
+        if (!$this->getTeamByUser() instanceof Team) {
+            throw new TeamNotFoundException();
+        }
+
+        $queryBuilder->andWhere('entity.team = :team');
+        $queryBuilder->setParameter('team', $this->getTeamByUser());
+
+        return $queryBuilder;
+    }
+
+    private function getTeamByUser(): ?Team
+    {
+        return $this->getUser()->getTeam();
     }
 
     public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
@@ -58,20 +78,12 @@ class PlayerCrudController extends AdminPlayerCrudController
         return $formBuilder;
     }
 
-    private function filterPlayersByTrainer(QueryBuilder $queryBuilder): QueryBuilder
+    public function configureActions(Actions $actions): Actions
     {
-        if (!$this->getTeamByUser() instanceof Team) {
-            throw new TeamNotFoundException();
-        }
+        $actions = parent::configureActions($actions);
 
-        $queryBuilder->andWhere('entity.team = :team');
-        $queryBuilder->setParameter('team', $this->getTeamByUser());
-
-        return $queryBuilder;
-    }
-
-    private function getTeamByUser(): ?Team
-    {
-        return $this->getUser()->getTeam();
+        return $actions
+            ->setPermission(Action::EDIT, Trainer::ROLE_TRAINER)
+            ->setPermission(Action::DELETE, Trainer::ROLE_TRAINER);
     }
 }

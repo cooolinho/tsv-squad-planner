@@ -100,9 +100,20 @@ class YouthClassHelper
         }
 
         $date
-            ->modify($modifyYears . ' year')
+            ->modify("$modifyYears years")
             ->setTime($min ? 0 : 23, $min ? 0 : 59, $min ? 0 : 59);
 
         return $date->setDate(date('Y', $date->getTimestamp()), $min ? 1 : 12, $min ? 1 : 31);
+    }
+
+    public static function getModifyYearChoices($maxYears = 10): array
+    {
+        $years = [];
+
+        for ($i = 0; $i <= $maxYears; $i++) {
+            $years["+$i years"] = $i;
+        }
+
+        return $years;
     }
 }
