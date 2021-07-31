@@ -4,24 +4,23 @@ namespace App\Entity\Traits;
 
 trait PlainPasswordTrait
 {
-    protected string $plainPassword;
+    public ?string $plainPassword = null;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPlainPassword(): string
+    public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
 
     /**
-     * @param string $plainPassword
+     * @param string|null $plainPassword
      * @return $this
      */
-    public function setPlainPassword(string $plainPassword): self
+    public function setPlainPassword(?string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
-
         return $this;
     }
 }

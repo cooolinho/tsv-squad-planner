@@ -17,7 +17,7 @@ class Team
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    public int $id;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -42,7 +42,7 @@ class Team
     /**
      * @ORM\OneToMany(targetEntity=Player::class, mappedBy="team")
      */
-    private $players;
+    private Collection $players;
 
     public function __construct()
     {

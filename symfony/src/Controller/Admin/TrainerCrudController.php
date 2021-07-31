@@ -65,7 +65,7 @@ class TrainerCrudController extends AbstractCrudController
                 ->onlyWhenCreating(),
             Field::new('plainPassword', $this->translator->trans('security.user.plain_password'))
                 ->setFormType(RepeatedType::class)
-                ->setFormTypeOptions($this->getRepeatedPasswordTypeOptions($this->translator))
+                ->setFormTypeOptions($this->getRepeatedPasswordTypeOptions($this->translator, true))
                 ->onlyOnForms()
                 ->onlyWhenCreating(),
         ];

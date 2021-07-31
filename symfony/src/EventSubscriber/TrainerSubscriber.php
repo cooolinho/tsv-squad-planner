@@ -6,6 +6,7 @@ use App\Entity\Team;
 use App\Entity\Trainer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeCrudActionEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
@@ -16,7 +17,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class TrainerSubscriber implements EventSubscriberInterface
 {
-    public const OLD_TEAMS = 'oldTeams';
+    private const OLD_TEAMS = 'oldTeams';
 
     protected EntityManagerInterface $entityManager;
     protected SessionInterface $session;
@@ -64,7 +65,6 @@ class TrainerSubscriber implements EventSubscriberInterface
         }
 
         $this->persistTrainerTeamsRelations($event->getEntityInstance());
-        $this->hashTrainerPassword($event->getEntityInstance());
     }
 
     private function persistTrainerTeamsRelations(Trainer $entityInstance): void
@@ -72,11 +72,6 @@ class TrainerSubscriber implements EventSubscriberInterface
         foreach ($entityInstance->getTeams() as $team) {
             $team->addTrainer($entityInstance);
         }
-    }
-
-    private function hashTrainerPassword(Trainer $trainer): void
-    {
-        $trainer->setPassword($this->passwordEncoder->hashPassword($trainer, $trainer->getPlainPassword()));
     }
 
     public function onBeforeEntityUpdatedEvent(BeforeEntityUpdatedEvent $event): void
@@ -106,5 +101,23 @@ class TrainerSubscriber implements EventSubscriberInterface
         }
 
         $this->session->remove(self::OLD_TEAMS);
+    }
+
+    /**
+     * Function for doctrine fixtures
+     *
+     * see services.yaml
+     *
+     * @param Trainer $trainer
+     * @param LifecycleEventArgs $event
+     */
+    public function prePersist(Trainer $trainer, LifecycleEventArgs $event): void
+    {
+        $this->hashTrainerPassword($trainer);
+    }
+
+    private function hashTrainerPassword(Trainer $trainer): void
+    {
+        $trainer->setPassword($this->passwordEncoder->hashPassword($trainer, $trainer->getPlainPassword()));
     }
 }

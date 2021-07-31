@@ -40,7 +40,6 @@ class Trainer implements UserInterface
 
     public function __construct()
     {
-        $this->plainPassword = '';
         $this->addRole(self::ROLE_TRAINER);
         $this->teams = new ArrayCollection();
     }
