@@ -69,8 +69,6 @@ class Team
     {
         $this->name = $name;
 
-        $this->setIdentifier($name);
-
         return $this;
     }
 

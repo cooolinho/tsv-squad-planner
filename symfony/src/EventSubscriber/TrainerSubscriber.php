@@ -48,7 +48,7 @@ class TrainerSubscriber implements EventSubscriberInterface
         $entity = $event->getAdminContext()->getEntity()->getInstance();
         $crudAction = $event->getAdminContext()->getCrud()->getCurrentAction();
 
-        if ($entity instanceof Trainer && $crudAction !== Action::EDIT) {
+        if ($entity instanceof Trainer && $crudAction === Action::EDIT) {
             $this->onBeforeTrainerCrudActionEdit($entity);
         }
     }
@@ -76,16 +76,14 @@ class TrainerSubscriber implements EventSubscriberInterface
 
     public function onBeforeEntityUpdatedEvent(BeforeEntityUpdatedEvent $event): void
     {
-        if (!$event->getEntityInstance() instanceof Trainer) {
-            return;
+        if ($event->getEntityInstance() instanceof Trainer) {
+            $this->updateTrainerTeamsRelations($event->getEntityInstance());
         }
-
-        $this->updateTrainerTeamsRelations($event->getEntityInstance());
     }
 
     private function updateTrainerTeamsRelations(Trainer $entityInstance): void
     {
-        $oldTeams = $this->session->get(self::OLD_TEAMS);
+        $oldTeams = $this->session->get(self::OLD_TEAMS, []);
         $newTeams = $entityInstance->getTeams();
 
         /** @var Team $team */

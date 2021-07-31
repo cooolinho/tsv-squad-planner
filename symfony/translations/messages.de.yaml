@@ -74,6 +74,7 @@ menu:
         team: Mannschaften
         club: Vereine
         trainer: Trainer
+        user: Benutzer
     logout: Ausloggen
     trainer:
         my_players: 'Meine Spieler'

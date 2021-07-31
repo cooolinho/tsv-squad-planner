@@ -6,6 +6,7 @@ use App\Entity\Club;
 use App\Entity\Player;
 use App\Entity\Team;
 use App\Entity\Trainer;
+use Cooolinho\Bundle\SecurityBundle\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -15,8 +16,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DashboardController extends AbstractDashboardController
 {
-    public const ROUTE_INDEX = 'admin_dashboard';
-
     private TranslatorInterface $translator;
 
     public function __construct(TranslatorInterface $translator)
@@ -64,6 +63,11 @@ class DashboardController extends AbstractDashboardController
             $this->translator->trans('menu.entity.trainer'),
             'fas fa-user-secret',
             Trainer::class
+        );
+        yield MenuItem::linkToCrud(
+            $this->translator->trans('menu.entity.user'),
+            'fas fa-user',
+            User::class
         );
 
         yield MenuItem::section($this->translator->trans('menu.section.account'));
