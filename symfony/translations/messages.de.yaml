@@ -95,6 +95,7 @@ team:
         label: Trainer
     label.singular: Mannschaft
     label.plural: Mannschaften
+    identifier.label: Kennung
 trainer:
     label:
         singular: Trainer

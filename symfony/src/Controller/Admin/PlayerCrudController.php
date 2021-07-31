@@ -37,6 +37,8 @@ class PlayerCrudController extends AbstractCrudController
 {
     use CrudFieldsAddressTrait, CrudFieldsTimestampTrait;
 
+    protected const TEMPLATE_INDEX = '@admin/pages/player/index.twig';
+
     protected UploadedFileService $uploadedFileService;
     protected CsvReader $csvReader;
     protected PlayerImporter $importer;
@@ -181,7 +183,7 @@ class PlayerCrudController extends AbstractCrudController
     public function index(AdminContext $context): Response
     {
         return $this->render(
-            '@admin/pages/player/index.twig',
+            static::TEMPLATE_INDEX,
             array_merge(parent::index($context)->all())
         );
     }

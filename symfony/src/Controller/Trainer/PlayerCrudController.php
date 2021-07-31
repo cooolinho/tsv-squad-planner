@@ -22,6 +22,8 @@ use Symfony\Component\Form\FormEvents;
 
 class PlayerCrudController extends AdminPlayerCrudController
 {
+    protected const TEMPLATE_INDEX = '@trainer/pages/player/index.twig';
+
     /**
      * @throws TeamsNotFoundException
      */

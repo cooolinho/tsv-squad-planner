@@ -29,6 +29,7 @@ class TeamCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name', $this->translator->trans('team.name.label')),
+            TextField::new('identifier', $this->translator->trans('team.identifier.label')),
             AssociationField::new('players', $this->translator->trans('team.players.label')),
             AssociationField::new('trainer', $this->translator->trans('team.trainer.label')),
         ];
