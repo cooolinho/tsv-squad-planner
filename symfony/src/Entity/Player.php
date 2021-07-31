@@ -53,11 +53,6 @@ class Player
     private int $foot = self::FOOT_UNKNOWN;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="players", cascade={"persist"})
-     */
-    private ?Team $team;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private int $trainingsJacket = self::CLOTHING_FIT_SIZE_UNKNOWN;
@@ -86,6 +81,11 @@ class Player
      * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="players")
      */
     private ?Club $club;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="players")
+     */
+    private ?Team $team;
 
     public function __construct()
     {
@@ -122,18 +122,6 @@ class Player
     public function setFoot(string $foot): self
     {
         $this->foot = $foot;
-
-        return $this;
-    }
-
-    public function getTeam(): ?Team
-    {
-        return $this->team;
-    }
-
-    public function setTeam(?Team $team): self
-    {
-        $this->team = $team;
 
         return $this;
     }
@@ -226,6 +214,18 @@ class Player
     public function setClub(?Club $club): self
     {
         $this->club = $club;
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Team $team): self
+    {
+        $this->team = $team;
 
         return $this;
     }

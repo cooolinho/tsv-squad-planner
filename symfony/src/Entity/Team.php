@@ -25,16 +25,6 @@ class Team
     private ?string $name;
 
     /**
-     * @ORM\OneToOne(targetEntity=Trainer::class, mappedBy="team", cascade={"persist", "remove"})
-     */
-    private ?Trainer $trainer;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Player::class, mappedBy="team")
-     */
-    private Collection $players;
-
-    /**
      * @ORM\Column(type="string", length=1)
      */
     private string $identifier;
@@ -44,9 +34,20 @@ class Team
      */
     private bool $isYouthTeam = true;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Trainer::class, inversedBy="teams", cascade={"persist"})
+     */
+    private Collection $trainer;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Player::class, mappedBy="team")
+     */
+    private $players;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
+        $this->trainer = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -73,19 +74,51 @@ class Team
         return $this;
     }
 
-    public function getTrainer(): ?Trainer
+    public function getIdentifier(): ?string
+    {
+        return $this->identifier;
+    }
+
+    public function setIdentifier(string $identifier): self
+    {
+        $this->identifier = str_replace(' ', '-', strtolower($identifier));
+
+        return $this;
+    }
+
+    public function getIsYouthTeam(): ?bool
+    {
+        return $this->isYouthTeam;
+    }
+
+    public function setIsYouthTeam(bool $isYouthTeam): self
+    {
+        $this->isYouthTeam = $isYouthTeam;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trainer[]
+     */
+    public function getTrainer(): Collection
     {
         return $this->trainer;
     }
 
-    public function setTrainer(Trainer $trainer): self
+    public function addTrainer(Trainer $trainer): self
     {
-        // set the owning side of the relation if necessary
-        if ($trainer->getTeam() !== $this) {
-            $trainer->setTeam($this);
+        if (!$this->trainer->contains($trainer)) {
+            $this->trainer->add($trainer);
+            $trainer->addTeam($this);
         }
 
-        $this->trainer = $trainer;
+        return $this;
+    }
+
+    public function removeTrainer(Trainer $trainer): self
+    {
+        $this->trainer->removeElement($trainer);
 
         return $this;
     }
@@ -116,30 +149,6 @@ class Team
                 $player->setTeam(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getIdentifier(): ?string
-    {
-        return $this->identifier;
-    }
-
-    public function setIdentifier(string $identifier): self
-    {
-        $this->identifier = str_replace(' ', '-', strtolower($identifier));
-
-        return $this;
-    }
-
-    public function getIsYouthTeam(): ?bool
-    {
-        return $this->isYouthTeam;
-    }
-
-    public function setIsYouthTeam(bool $isYouthTeam): self
-    {
-        $this->isYouthTeam = $isYouthTeam;
 
         return $this;
     }

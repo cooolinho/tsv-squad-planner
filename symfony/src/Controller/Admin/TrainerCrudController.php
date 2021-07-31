@@ -16,6 +16,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class TrainerCrudController extends AbstractCrudController
@@ -23,10 +25,14 @@ class TrainerCrudController extends AbstractCrudController
     use RepeatedPasswordFormTypeTrait, CrudFieldsAddressTrait, CrudFieldsTimestampTrait;
 
     protected TranslatorInterface $translator;
+    protected SessionInterface $session;
+    protected UserPasswordHasherInterface $passwordEncoder;
 
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator, SessionInterface $session, UserPasswordHasherInterface $passwordEncoder)
     {
         $this->translator = $translator;
+        $this->session = $session;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public static function getEntityFqcn(): string
@@ -37,7 +43,8 @@ class TrainerCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $trainerAssociationFields = [
-            AssociationField::new('team', $this->translator->trans('trainer.team.label')),
+            AssociationField::new('teams', $this->translator->trans('trainer.teams.label'))
+                ->setRequired(true),
         ];
 
         $trainerPersonalInformation = array_merge([
@@ -53,17 +60,20 @@ class TrainerCrudController extends AbstractCrudController
         ];
 
         $trainerPassword = [
-            FormField::addPanel($this->translator->trans('trainer.panel.password'))->onlyOnForms(),
+            FormField::addPanel($this->translator->trans('trainer.panel.password'))
+                ->onlyOnForms()
+                ->onlyWhenCreating(),
             Field::new('plainPassword', $this->translator->trans('security.user.plain_password'))
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions($this->getRepeatedPasswordTypeOptions($this->translator))
-                ->onlyOnForms(),
+                ->onlyOnForms()
+                ->onlyWhenCreating(),
         ];
 
         $timestampFields = [
-            $this->getTimestampPanel()->hideOnIndex(),
-            $this->getCreatedAtField()->hideOnIndex(),
-            $this->getUpdatedAtField()->hideOnIndex(),
+            $this->getTimestampPanel()->hideOnIndex()->hideOnForm(),
+            $this->getCreatedAtField()->hideOnIndex()->hideOnForm(),
+            $this->getUpdatedAtField()->hideOnIndex()->hideOnForm(),
         ];
 
         return array_merge(

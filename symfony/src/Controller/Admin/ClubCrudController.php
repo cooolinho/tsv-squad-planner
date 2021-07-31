@@ -32,7 +32,7 @@ class ClubCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setDefaultSort(['firstname' => 'ASC', 'lastname' => 'ASC', 'birthday' => 'ASC'])
+            ->setDefaultSort(['name' => 'ASC'])
             ->setPaginatorPageSize(30)
             ->setPageTitle(Crud::PAGE_INDEX, $this->translator->trans('page.club.title.index'))
             ->setPageTitle(Crud::PAGE_DETAIL, $this->translator->trans('page.club.title.detail'))

@@ -4,7 +4,7 @@ namespace App\Entity\Traits;
 
 trait PlainPasswordTrait
 {
-    protected ?string $plainPassword;
+    protected string $plainPassword;
 
     /**
      * @return string

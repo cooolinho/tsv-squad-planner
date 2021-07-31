@@ -11,6 +11,8 @@ use Cooolinho\Bundle\SecurityBundle\Entity\Traits\CredentialsTrait;
 use Cooolinho\Bundle\SecurityBundle\Entity\Traits\EmailTrait;
 use Cooolinho\Bundle\SecurityBundle\Entity\Traits\NameTrait;
 use Cooolinho\Bundle\SecurityBundle\Entity\Traits\RoleTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -32,14 +34,15 @@ class Trainer implements UserInterface
     private ?int $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Team::class, inversedBy="trainer", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity=Team::class, mappedBy="trainer", cascade={"persist"})
      */
-    private ?Team $team = null;
+    private Collection $teams;
 
     public function __construct()
     {
+        $this->plainPassword = '';
         $this->addRole(self::ROLE_TRAINER);
+        $this->teams = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -52,14 +55,29 @@ class Trainer implements UserInterface
         return $this->id;
     }
 
-    public function getTeam(): ?Team
+    /**
+     * @return Collection|Team[]
+     */
+    public function getTeams(): Collection
     {
-        return $this->team;
+        return $this->teams;
     }
 
-    public function setTeam(Team $team): self
+    public function addTeam(Team $team): self
     {
-        $this->team = $team;
+        if (!$this->teams->contains($team)) {
+            $this->teams->add($team);
+            $team->addTrainer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeam(Team $team): self
+    {
+        if ($this->teams->removeElement($team)) {
+            $team->removeTrainer($this);
+        }
 
         return $this;
     }

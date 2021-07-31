@@ -34,7 +34,7 @@ class TrainerFixtures extends UserFixtures implements DependentFixtureInterface
 
             /** @var Team $team */
             $team = $this->getReference($teamIdentifier);
-            $team->setTrainer($trainer);
+            $trainer->addTeam($team);
 
             $manager->persist($trainer);
         }

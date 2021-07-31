@@ -98,8 +98,8 @@ trainer:
     label:
         singular: Trainer
         plural: Trainer
-    team:
-        label: Mannschaft
+    teams:
+        label: Mannschaften
     panel:
         personal_information: 'Persönliche Informationen'
         contact_information: 'Kontakt Informationen'
